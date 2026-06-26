@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a; 
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Force light-mode scaling inside the auth cards even if Windows is in dark mode */
+:root {
+  color-scheme: light;
+}
