@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import Button from "@/components/ui/Button";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -53,8 +54,7 @@ export default function SignUpPage() {
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center font-sans select-none px-4">
-      <div className="w-full max-w-[350px] bg-white rounded-3xl border border-slate-100/90 shadow-2xl shadow-slate-200/60 px-5 py-4 md:px-7 flex flex-col justify-center transition-all">
-
+      <div className="w-full max-w-[350px] md:max-w-[400px] bg-white rounded-3xl border border-slate-100/90 shadow-2xl shadow-slate-200/60 p-6 md:px-10 flex flex-col justify-center transition-all">
         <div className="flex w-full mb-3.5 border-b border-slate-100 text-center flex-shrink-0">
           <div className="w-1/2 pb-2 text-xs font-bold text-[#4f46e5] border-b-2 border-[#4f46e5]">Sign Up</div>
           <Link href="/log-in" className="w-1/2 pb-2 text-xs font-medium text-slate-400 hover:text-[#4f46e5] transition-colors">Log In</Link>
@@ -115,7 +115,12 @@ export default function SignUpPage() {
             <label htmlFor="terms" className="text-[10px] font-semibold text-slate-400">I agree to Terms & Conditions</label>
           </div>
 
-          <button type="submit" disabled={loading} className="w-full h-[36px] bg-[#4f46e5] hover:bg-[#4338ca] text-white text-xs font-semibold rounded-xl transition-all shadow-md">{loading ? "Creating..." : "Create Account"}</button>
+          <Button
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Creating..." : "Create Account"}
+          </Button>
         </form>
 
         <div className="my-4 flex items-center justify-center gap-3">

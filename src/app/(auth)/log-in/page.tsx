@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import Button from "@/components/ui/Button";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function SignInPage() {
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center font-sans select-none px-4">
-      <div className="w-full max-w-[350px] bg-white rounded-3xl border border-slate-100/90 shadow-2xl shadow-slate-200/60 px-5 py-4 md:px-7 flex flex-col justify-center transition-all">
+      <div className="w-full max-w-[350px] md:max-w-[400px] bg-white rounded-3xl border border-slate-100/90 shadow-2xl shadow-slate-200/60 p-6 md:px-10 flex flex-col justify-center transition-all">
 
         {/* Navigation Tabs Header */}
         <div className="flex w-full mb-3.5 border-b border-slate-100 text-center flex-shrink-0">
@@ -66,7 +67,6 @@ export default function SignInPage() {
           </div>
 
           {/* Password Input */}
-          {/* Password Input */}
           <div>
             <label className="block text-[10px] font-semibold text-slate-600 mb-0.5">Password</label>
             <div className="relative">
@@ -78,13 +78,16 @@ export default function SignInPage() {
                 {showPassword ? <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg> : <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" /><line x1="1" y1="1" x2="23" y2="23" /></svg>}
               </button>
             </div>
+
             {/* Forgot password moved below the input field */}
             <div className="flex justify-end mt-1">
               <Link href="/forgot-password" className="text-[10px] font-bold text-[#4f46e5] hover:underline">Forgot password?</Link>
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className="w-full mt-4 h-[36px] bg-[#4f46e5] hover:bg-[#4338ca] text-white text-xs font-semibold rounded-xl transition-all shadow-md shadow-indigo-100">{loading ? "Logging in..." : "Login"}</button>
+          <Button type="submit" disabled={loading} className="w-full mt-4">
+            {loading ? "Logging in..." : "Login"}
+          </Button>
         </form>
 
         <div className="my-4 flex items-center justify-center gap-3">
