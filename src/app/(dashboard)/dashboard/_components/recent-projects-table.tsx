@@ -3,7 +3,7 @@
 import React from "react";
 import { IoChevronForward } from "react-icons/io5";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { DashboardCard } from "@/components/dashboard/dashboard-card";
+import { DashboardCard } from "./dashboard-card";
 import { IoArchiveOutline, IoMicOutline, IoCheckmark } from "react-icons/io5";
 import { LuPenLine } from "react-icons/lu";
 

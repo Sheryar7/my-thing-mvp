@@ -1,4 +1,3 @@
-// src/components/dashboard/stats-card.tsx
 "use client";
 
 import React from "react";

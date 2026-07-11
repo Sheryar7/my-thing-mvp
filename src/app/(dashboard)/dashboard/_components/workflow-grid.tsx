@@ -3,7 +3,7 @@
 import React from "react";
 import { IoArchiveOutline, IoMicOutline, IoCheckmark } from "react-icons/io5";
 import { LuPenLine } from "react-icons/lu";
-import { WorkflowCard, type WorkflowCardConfig } from "@/components/dashboard/workflow-card";
+import { WorkflowCard, type WorkflowCardConfig } from "./workflow-card";
 
 const workflowSteps: WorkflowCardConfig[] = [
     {

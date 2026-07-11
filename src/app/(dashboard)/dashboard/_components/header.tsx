@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "@/components/ui/Button";
 import { IoNotificationsOutline } from "react-icons/io5";
+import { FiPlus } from "react-icons/fi";
 
 interface UserProfile {
     name: string;
@@ -42,10 +43,12 @@ export function Header() {
 
             <div className="hidden md:flex items-center gap-3.5">
                 <Button
+                    type="button"
                     onClick={handleCreateProject}
-                    className="max-[865px]:hidden bg-violet-600 hover:bg-violet-700 text-white font-medium rounded-lg px-4 py-2 text-sm transition-colors shadow-sm"
+                    className="max-[865px]:hidden inline-flex items-center justify-center gap-2 sm:w-auto h-auto px-5 py-2.5 text-sm font-medium rounded-xl shrink-0 active:scale-[0.98]"
                 >
-                    + New Project
+                    <FiPlus className="h-4 w-4 stroke-[3]" />
+                    <span>New Project</span>
                 </Button>
 
                 <button className="p-2 text-slate-400 hover:text-slate-600 rounded-full transition-colors relative">

@@ -1,9 +1,9 @@
-import { Header } from "@/components/dashboard/header";
-import { ActiveProjectCard } from "@/components/dashboard/active-project-card";
-import { WorkflowGrid } from "@/components/dashboard/workflow-grid";
-import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
-import { QuickStats } from "@/components/dashboard/quick-stats";
-import { RecentProjectsTable } from "@/components/dashboard/recent-projects-table";
+import { Header } from "./_components/header";
+import { ActiveProjectCard } from "./_components/active-project-card";
+import { WorkflowGrid } from "./_components/workflow-grid";
+import { DashboardLayout } from "./_components/dashboard-layout";
+import { QuickStats } from "./_components/quick-stats";
+import { RecentProjectsTable } from "./_components/recent-projects-table";
 
 export default function DashboardPage() {
   return (

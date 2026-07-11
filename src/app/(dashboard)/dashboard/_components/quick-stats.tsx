@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import React from "react";
-import { StatsCard } from "@/components/dashboard/stats-card";
+import { StatsCard } from "./stats-card";
 
 const stats = [
   { label: "Projects", value: 12, variant: "emerald" as const },

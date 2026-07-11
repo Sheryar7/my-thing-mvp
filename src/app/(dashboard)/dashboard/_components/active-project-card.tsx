@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { DashboardCard } from "@/components/dashboard/dashboard-card";
+import { DashboardCard } from "./dashboard-card";
+import Button from "@/components/ui/Button";
 
 interface ActiveProjectProps {
     title: string;
@@ -41,12 +42,12 @@ export function ActiveProjectCard({ title, progress, lastEdited }: ActiveProject
                 </div>
             </div>
 
-            <button
+            <Button
                 onClick={handleContinueProject}
                 className="w-full md:w-auto bg-violet-600 hover:bg-violet-700 text-white font-medium rounded-lg px-4 py-2 text-sm transition-colors duration-200 shadow-sm"
             >
                 Continue →
-            </button>
+            </Button>
         </DashboardCard>
     );
 }
