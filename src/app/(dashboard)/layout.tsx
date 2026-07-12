@@ -3,15 +3,16 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Sidebar from "./_components/sidebar"; 
+import Sidebar from "./_components/sidebar";
 import { HiOutlineMenu } from "react-icons/hi";
 import { IoNotificationsOutline, IoArchiveOutline, IoMicOutline, IoCheckmark } from "react-icons/io5";
 import { GrHomeRounded } from "react-icons/gr";
 import { LuPenLine } from "react-icons/lu";
+import { FaPlus } from "react-icons/fa6";
 
 export default function SharedDashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  
+
   // Smart route matching helper to keep highlight states clean
   const isTabActive = (href: string) => {
     if (href === "/dashboard") return pathname === "/dashboard";
@@ -52,38 +53,50 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
           {children}
         </main>
 
+        {/* FLOATING ACTION BUTTON (+) FOR MOBILE ONLY */}
+        <button
+          type="button"
+          onClick={() => console.log("Open creation modal/handler")}
+          className="md:hidden fixed bottom-20 right-6 z-50 flex items-center justify-center w-14 h-14 bg-brand-indigo hover:bg-brand-indigo/90 text-white rounded-full shadow-[0_8px_30px_rgb(79,70,229,0.3)] transition-transform active:scale-95"
+          aria-label="Create new item"
+        >
+          <FaPlus className="w-6 h-6 stroke-[2.5]" />
+        </button>
+
         {/* MOBILE BOTTOM NAVIGATION TRACK SHEET */}
-        <div className="md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-slate-100 bg-white/95 backdrop-blur-md px-4 py-3 shadow-lg">
-          <div className="grid grid-cols-5 gap-2 max-w-md mx-auto">
-            <Link href="/dashboard" className={`inline-flex flex-col items-center justify-center rounded-2xl px-2 py-2.5 transition-all ${
-              isTabActive("/dashboard") ? "bg-violet-600 text-white shadow-sm" : "bg-slate-50 text-slate-500"
-            }`}>
+        <div className="md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-slate-100 bg-white px-4 py-2 shadow-lg">
+          <div className="grid grid-cols-5 gap-1 max-w-md mx-auto">
+
+            <Link href="/dashboard" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/dashboard") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}>
               <GrHomeRounded className="w-5 h-5" />
+              <span className="text-[11px] tracking-wide">Home</span>
             </Link>
 
-            <Link href="/archive" className={`inline-flex flex-col items-center justify-center rounded-2xl px-2 py-2.5 transition-all ${
-              isTabActive("/archive") ? "bg-violet-600 text-white shadow-sm" : "bg-slate-50 text-slate-500"
-            }`}>
+            <Link href="/archive" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/archive") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}>
               <IoArchiveOutline className="w-5 h-5" />
+              <span className="text-[11px] tracking-wide">Archive</span>
             </Link>
 
-            <Link href="/workshop" className={`inline-flex flex-col items-center justify-center rounded-2xl px-2 py-2.5 transition-all ${
-              isTabActive("/workshop") ? "bg-violet-600 text-white shadow-sm" : "bg-slate-50 text-slate-500"
-            }`}>
+            <Link href="/workshop" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/workshop") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}>
               <LuPenLine className="w-5 h-5" />
+              <span className="text-[11px] tracking-wide">Workshop</span>
             </Link>
 
-            <Link href="/forge" className={`inline-flex flex-col items-center justify-center rounded-2xl px-2 py-2.5 transition-all ${
-              isTabActive("/forge") ? "bg-violet-600 text-white shadow-sm" : "bg-slate-50 text-slate-500"
-            }`}>
+            <Link href="/forge" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/forge") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}>
               <IoMicOutline className="w-5 h-5" />
+              <span className="text-[11px] tracking-wide">Forge</span>
             </Link>
 
-            <Link href="/lens" className={`inline-flex flex-col items-center justify-center rounded-2xl px-2 py-2.5 transition-all ${
-              isTabActive("/lens") ? "bg-violet-600 text-white shadow-sm" : "bg-slate-50 text-slate-500"
-            }`}>
+            <Link href="/lens" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/lens") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}>
               <IoCheckmark className="w-5 h-5" />
+              <span className="text-[11px] tracking-wide">Lens</span>
             </Link>
+
           </div>
         </div>
 
