@@ -4,7 +4,7 @@ import React from "react";
 import { StatsCard } from "./stats-card";
 
 const stats = [
-  { label: "Projects", value: 12, variant: "emerald" as const },
+  { label: "Projects", value: 12, variant: "green" as const },
   { label: "Sources", value: 145, variant: "blue" as const },
   { label: "Scripts", value: 19, variant: "orange" as const },
   { label: "Published", value: 8, variant: "pink" as const },
