@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-// Swapped individual conditional graphics for the unified system folder icon
 import { CiFolderOn } from "react-icons/ci";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
@@ -49,12 +48,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   * DEVS: If dynamic custom user-selected project icons are implemented in the future,
                   * map the custom icon component here dynamically based on a string property inside `project`.
                   */}
-                <div className="w-12 h-12 rounded-full bg-indigo-50 border border-indigo-100/30 flex items-center justify-center shrink-0">
-                    <CiFolderOn className="w-6 h-6 text-indigo-600 stroke-[0.5]" />
+                <div className="w-12 h-12 rounded-full bg-icon-bg border border-indigo-100/30 flex items-center justify-center shrink-0">
+                    <CiFolderOn className="w-6 h-6 text-icon-text stroke-[0.5]" />
                 </div>
 
                 <div className="flex flex-col min-w-0">
-                    <h3 className="font-bold text-slate-900 tracking-tight text-[17px] leading-tight group-hover:text-indigo-600 transition-colors truncate">
+                    <h3 className="font-bold text-slate-900 tracking-tight text-[17px] leading-tight group-hover:text-hover-text transition-colors truncate">
                         {project.name}
                     </h3>
                     <span className="text-sm text-slate-500 font-medium mt-0.5">
@@ -82,7 +81,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                         {project.updatedAtLabel}
                     </p>
 
-                    <div className="text-indigo-700 hover:text-indigo-800 font-semibold text-sm flex items-center gap-1.5 transition-colors shrink-0">
+                    <div className="text-icon-text group-hover:text-hover-text font-semibold text-sm flex items-center gap-1.5 transition-colors shrink-0">
                         <span>Open Archive</span>
                         <FaLongArrowAltRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     </div>

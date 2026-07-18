@@ -27,41 +27,35 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
       <div className="flex-1 flex flex-col overflow-hidden w-full relative">
 
         {/* MOBILE TOP NAVIGATION BAR - Fixed Layer */}
-        <div className="md:hidden fixed top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md px-5 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 hover:bg-slate-100 p-2 text-slate-700 transition-colors">
-              <HiOutlineMenu className="w-5 h-5" />
-            </button>
-            <span className="text-lg font-bold text-slate-900 tracking-tight">MyThing</span>
-          </div>
+        {!isTabActive("/workshop") && (
+          <div className="md:hidden fixed top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md px-5 py-3.5 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 hover:bg-slate-100 p-2 text-slate-700 transition-colors">
+                <HiOutlineMenu className="w-5 h-5" />
+              </button>
+              <span className="text-lg font-bold text-slate-900 tracking-tight">MyThing</span>
+            </div>
 
-          <div className="flex items-center gap-3">
-            <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 p-2 text-slate-400 hover:text-slate-600 relative">
-              <IoNotificationsOutline className="w-5.5 h-5.5" />
-              <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-violet-600 rounded-full" />
-            </button>
-            <img
-              src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sherry"
-              alt="User profile"
-              className="w-9 h-9 rounded-full object-cover border border-slate-100"
-            />
+            <div className="flex items-center gap-3">
+              <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 p-2 text-slate-400 hover:text-slate-600 relative">
+                <IoNotificationsOutline className="w-5.5 h-5.5" />
+                <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-violet-600 rounded-full" />
+              </button>
+              <img
+                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sherry"
+                alt="User profile"
+                className="w-9 h-9 rounded-full object-cover border border-slate-100"
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* DYNAMIC VIEW ROUTE DISPLAY SYSTEM */}
-        <main className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 md:p-8 lg:p-12 pt-20 md:pt-8 pb-32 md:pb-8 w-full">
+        <main className={`flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 md:p-8 lg:p-12 pb-32 md:pb-8 w-full ${isTabActive("/workshop") ? "pt-4" : "pt-20"
+          } md:pt-8`}>
           {children}
         </main>
 
-        {/* FLOATING ACTION BUTTON (+) FOR MOBILE ONLY */}
-        <button
-          type="button"
-          onClick={() => console.log("Open creation modal/handler")}
-          className="md:hidden fixed bottom-20 right-6 z-50 flex items-center justify-center w-14 h-14 bg-brand-indigo hover:bg-brand-indigo/90 text-white rounded-full shadow-[0_8px_30px_rgb(79,70,229,0.3)] transition-transform active:scale-95"
-          aria-label="Create new item"
-        >
-          <FaPlus className="w-6 h-6 stroke-[2.5]" />
-        </button>
 
         {/* MOBILE BOTTOM NAVIGATION TRACK SHEET */}
         <div className="md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-slate-100 bg-white px-4 py-2 shadow-lg">

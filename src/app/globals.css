@@ -2,12 +2,20 @@
 
 @theme {
   --color-brand-indigo: #4F46E5;
+
+  --color-icon-bg: #e3e4ff;
+
+  --color-icon-text: #610b8f;
+
+  --color-hover-text: #7814a8;
+
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 body {
   background-color: #f8fafc;
   color: #0f172a; 
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /* Force light-mode scaling inside the auth cards even if Windows is in dark mode */

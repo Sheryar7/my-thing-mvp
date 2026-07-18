@@ -1,11 +1,18 @@
+"use client";
+
 import { Header } from "./_components/header";
 import { ActiveProjectCard } from "./_components/active-project-card";
 import { WorkflowGrid } from "./_components/workflow-grid";
 import { DashboardLayout } from "./_components/dashboard-layout";
 import { QuickStats } from "./_components/quick-stats";
 import { RecentProjectsTable } from "./_components/recent-projects-table";
+import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
 
 export default function DashboardPage() {
+  const handleCreateProject = () => {
+    console.log("Create new project initialized from FAB!");
+    // Your actual modal opening or router pushing logic goes here
+  };
   return (
     <DashboardLayout>
       {/* Primary dashboard header */}
@@ -31,6 +38,10 @@ export default function DashboardPage() {
           <QuickStats />
         </section>
       </div>
+      <FloatingActionButton 
+              onClick={handleCreateProject} 
+              ariaLabel="Create new project" 
+            />
     </DashboardLayout>
   );
 }

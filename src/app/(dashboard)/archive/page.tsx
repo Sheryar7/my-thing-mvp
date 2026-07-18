@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { ArchiveHeader } from "./_components/archive-header";
 import { ArchiveFilterBar } from "./_components/archive-filter-bar";
 import { ProjectCard, ProjectData } from "./_components/project-card";
+import { FloatingActionButton } from "@/components/ui/FloatingActionButton"; // Adjust this path if your file is saved elsewhere!
 
 // Mock collections updated with exact Figma item counters
 const MOCK_PROJECTS: ProjectData[] = [
@@ -61,6 +62,11 @@ export default function ArchivePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"All" | "Active" | "Completed" | "Drafts">("All");
 
+  const handleCreateProject = () => {
+    console.log("Create new project initialized from FAB!");
+    // Your actual modal opening or router pushing logic goes here
+  };
+
   const filteredProjects = MOCK_PROJECTS.filter((project) => {
     const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTab = activeTab === "All" || project.status === activeTab;
@@ -68,7 +74,7 @@ export default function ArchivePage() {
   });
 
   return (
-    <div className="space-y-8 w-full min-h-screen p-2 md:p-0 bg-transparent font-sans antialiased">
+    <div className="space-y-8 w-full min-h-screen p-2 md:p-0 bg-transparent font-sans antialiased relative">
       {/* Search and Action Bar */}
       <ArchiveHeader searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
@@ -78,7 +84,7 @@ export default function ArchivePage() {
       {/* Grid Display Container */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-slate-900 tracking-tight">Recent Projects</h2>
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight">Projects</h2>
           <span className="text-xs text-slate-400 font-medium bg-slate-100 px-2.5 py-1 rounded-lg">
             Total: {filteredProjects.length}
           </span>
@@ -97,6 +103,13 @@ export default function ArchivePage() {
           </div>
         )}
       </div>
+
+      {/* MOBILE FLOATING ACTION BUTTON (FAB): Renders only on mobile screens */}
+      
+      <FloatingActionButton 
+        onClick={handleCreateProject} 
+        ariaLabel="Create new project" 
+      />
     </div>
   );
 }

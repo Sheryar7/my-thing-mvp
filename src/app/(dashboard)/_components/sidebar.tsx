@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Link from "next/link"; 
-import { usePathname } from "next/navigation"; 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { GrHomeRounded } from "react-icons/gr";
 import { IoArchiveOutline, IoMicOutline, IoCheckmark } from "react-icons/io5";
 import { LuPenLine, LuLogOut } from "react-icons/lu";
@@ -39,13 +39,20 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 p-3 font-medium rounded-lg transition duration-200 ${
-                  active
-                    ? "bg-violet-50 text-violet-600 font-semibold"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                }`}
+                // 1. Added "group" here so we can style children based on parent hover
+                className={`group flex items-center gap-3 p-3 font-medium rounded-lg transition duration-200 ${active
+                  ? "bg-violet-50 text-violet-600 font-semibold"
+                  : "text-slate-500 hover:bg-slate-50 hover:text-violet-500"
+                  }`}
               >
-                <Icon className={`w-5 h-5 ${active ? "text-violet-600" : "text-slate-400"}`} />
+                <Icon
+                  // 2. Changed "hover:text-violet-500" to "group-hover:text-violet-500"
+                  // 3. Removed the accidental bg-violet-50 & font-semibold from the active icon class
+                  className={`w-5 h-5 transition-colors duration-200 ${active
+                    ? "text-violet-600"
+                    : "text-slate-500 group-hover:text-violet-500"
+                    }`}
+                />
                 <span>{item.label}</span>
               </Link>
             );
@@ -58,7 +65,9 @@ export default function Sidebar() {
           <CiSettings className="w-5 h-5 text-slate-400" />
           <span>Settings</span>
         </Link>
-        <button type="button" className="flex items-center gap-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg text-left transition w-full">
+        <button
+          type="button"
+          className="flex items-center gap-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg text-left transition w-full">
           <LuLogOut className="w-5 h-5 text-slate-400" />
           <span>Logout</span>
         </button>
