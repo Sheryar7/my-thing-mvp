@@ -1,6 +1,11 @@
+"use client";
+
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FiGrid, FiArchive } from "react-icons/fi";
+import { FiGrid } from "react-icons/fi";
+import { LuPenLine } from "react-icons/lu";
+import { IoArchiveOutline } from "react-icons/io5";
 
 export default function Home() {
   return (
@@ -33,7 +38,7 @@ export default function Home() {
       </header>
 
       {/* HERO SECTION */}
-      <main className="flex-1 max-w-4xl mx-auto px-6 flex flex-col items-center justify-center text-center py-12 md:py-20 space-y-12">
+      <main className="flex-1 max-w-5xl mx-auto px-6 flex flex-col items-center justify-center text-center py-12 md:py-20 space-y-12">
         <div className="space-y-4 max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Welcome back to your workspace hub.
@@ -44,7 +49,8 @@ export default function Home() {
         </div>
 
         {/* APPLICATION MODULE NAVIGATION TILES */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
+        {/* Changed grid layout to "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" to perfectly support three items */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl">
 
           {/* Card 1: Dashboard */}
           <Link
@@ -66,13 +72,28 @@ export default function Home() {
             className="group p-5 bg-white border border-slate-200 rounded-[20px] shadow-sm hover:border-indigo-500/40 hover:shadow-md transition-all text-left flex flex-col justify-between min-h-[140px]"
           >
             <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center transition-colors group-hover:bg-indigo-600 group-hover:text-white">
-              <FiArchive className="w-5 h-5 stroke-[2.2]" />
+              <IoArchiveOutline className="w-5 h-5 stroke-[2.2]" />
             </div>
             <div>
               <h3 className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Archive Module</h3>
               <p className="text-xs text-slate-400 font-medium mt-0.5">Access document previews & sources</p>
             </div>
           </Link>
+
+          {/* Card 3: Workshop (Newly Added) */}
+          <Link
+            href="/workshop"
+            className="group p-5 bg-white border border-slate-200 rounded-[20px] shadow-sm hover:border-indigo-500/40 hover:shadow-md transition-all text-left flex flex-col justify-between min-h-[140px]"
+          >
+            <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+              <LuPenLine className="w-5 h-5 stroke-[2.2]" />
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Workshop</h3>
+              <p className="text-xs text-slate-400 font-medium mt-0.5">Draft scripts and run AI transformations</p>
+            </div>
+          </Link>
+          
         </div>
 
         {/* BOTTOM BRAND FOOTER ICON */}
