@@ -8,16 +8,34 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { IoNotificationsOutline, IoArchiveOutline, IoMicOutline, IoCheckmark } from "react-icons/io5";
 import { GrHomeRounded } from "react-icons/gr";
 import { LuPenLine } from "react-icons/lu";
-import { FaPlus } from "react-icons/fa6";
 
 export default function SharedDashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  // Smart route matching helper to keep highlight states clean
+  // Smart route matching helper for tab highlights
   const isTabActive = (href: string) => {
     if (href === "/dashboard") return pathname === "/dashboard";
     return pathname.startsWith(href);
   };
+
+  /**
+   * Professional Route-Matching Helper:
+   * Determines if the global mobile top header should be hidden based on the active path.
+   */
+  const shouldHideMobileHeader = () => {
+    // Hide on Workshop & Forge root pages
+    if (pathname.startsWith("/workshop") || pathname.startsWith("/forge")) {
+      return true;
+    }
+    // Hide on Archive detail sub-routes (e.g., /archive/podcast-10, /archive/podcast-10/src-1)
+    // but keep visible on main list page (/archive)
+    if (pathname.startsWith("/archive/") && pathname !== "/archive") {
+      return true;
+    }
+    return false;
+  };
+
+  const hideHeader = shouldHideMobileHeader();
 
   return (
     <div className="flex h-screen w-full bg-[#f8fafc] text-slate-900 relative overflow-hidden">
@@ -26,8 +44,8 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
 
       <div className="flex-1 flex flex-col overflow-hidden w-full relative">
 
-        {/* MOBILE TOP NAVIGATION BAR - Fixed Layer */}
-        {!isTabActive("/workshop") && (
+        {/* MOBILE TOP NAVIGATION BAR - Conditional Layer */}
+        {!hideHeader && (
           <div className="md:hidden fixed top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md px-5 py-3.5 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 hover:bg-slate-100 p-2 text-slate-700 transition-colors">
@@ -51,46 +69,66 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
         )}
 
         {/* DYNAMIC VIEW ROUTE DISPLAY SYSTEM */}
-        <main className={`flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 md:p-8 lg:p-12 pb-32 md:pb-8 w-full ${isTabActive("/workshop") ? "pt-4" : "pt-20"
-          } md:pt-8`}>
+        <main
+          className={`flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 md:p-8 lg:p-12 pb-32 md:pb-8 w-full ${
+            hideHeader ? "pt-4" : "pt-20"
+          } md:pt-8`}
+        >
           {children}
         </main>
-
 
         {/* MOBILE BOTTOM NAVIGATION TRACK SHEET */}
         <div className="md:hidden fixed inset-x-0 bottom-0 z-40 border-t border-slate-100 bg-white px-4 py-2 shadow-lg">
           <div className="grid grid-cols-5 gap-1 max-w-md mx-auto">
-
-            <Link href="/dashboard" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/dashboard") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}>
+            <Link
+              href="/dashboard"
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
+                isTabActive("/dashboard") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}
+            >
               <GrHomeRounded className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Home</span>
             </Link>
 
-            <Link href="/archive" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/archive") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}>
+            <Link
+              href="/archive"
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
+                isTabActive("/archive") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}
+            >
               <IoArchiveOutline className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Archive</span>
             </Link>
 
-            <Link href="/workshop" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/workshop") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}>
+            <Link
+              href="/workshop"
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
+                isTabActive("/workshop") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}
+            >
               <LuPenLine className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Workshop</span>
             </Link>
 
-            <Link href="/forge" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/forge") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}>
+            <Link
+              href="/forge"
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
+                isTabActive("/forge") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}
+            >
               <IoMicOutline className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Forge</span>
             </Link>
 
-            <Link href="/lens" className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/lens") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}>
+            <Link
+              href="/lens"
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
+                isTabActive("/lens") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+              }`}
+            >
               <IoCheckmark className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Lens</span>
             </Link>
-
           </div>
         </div>
 
