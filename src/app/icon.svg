@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Soft Drop Shadow matching the image preview -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#4F46E5" flood-opacity="0.28" />
+    </filter>
+  </defs>
+
+  <!-- Purple/Indigo Rounded Squircle Base -->
+  <rect 
+    x="32" 
+    y="24" 
+    width="448" 
+    height="448" 
+    rx="128" 
+    fill="#5243ED" 
+    filter="url(#shadow)" 
+  />
+
+  <!-- Bold White 'M' Glyphs -->
+  <path
+    d="M 162 342 V 170 H 200 L 256 254 L 312 170 H 350 V 342 H 314 V 222 L 268 292 H 244 L 198 222 V 342 Z"
+    fill="#FFFFFF"
+  />
+</svg>
