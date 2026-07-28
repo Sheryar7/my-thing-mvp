@@ -2,42 +2,42 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { HiArrowLeft } from "react-icons/hi";
 import Button from "@/components/ui/Button";
 
 export function ForgeHeader() {
   return (
     <header className="w-full border-b border-slate-100 pb-4 md:pb-5">
-      {/* Mobile View Header Layout */}
+      {/* Mobile View Header Layout (Back arrow on left, Title/Subtitle centered) */}
       <div className="relative flex md:hidden items-center justify-center w-full min-h-[44px]">
-        {/* Back Button on Left */}
-        <button
-          type="button"
-          onClick={() => window.history.back()}
-          className="absolute left-0 p-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+        {/* Back Button - Positioned absolute left */}
+        <Link
+          href="/dashboard"
+          className="absolute left-0 p-1 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           aria-label="Go back"
         >
-          <ArrowLeft className="w-5 h-5" />
-        </button>
+          <HiArrowLeft className="w-5 h-5" />
+        </Link>
 
-        {/* Centered Title & Subtitle */}
+        {/* Title & Subtitle - Centered */}
         <div className="text-center">
-          <h1 className="text-xl font-bold text-slate-900 leading-tight">
+          <h1 className="text-xl font-bold text-slate-900 tracking-tight">
             Forge
           </h1>
-          <p className="text-xs text-slate-500 font-medium">
+          <p className="text-xs font-medium text-slate-400 mt-0.5">
             Podcast Episode 12
           </p>
         </div>
       </div>
 
-      {/* Desktop View Header Layout */}
+      {/* Desktop View Header Layout (Left aligned title, Right aligned CTA) */}
       <div className="hidden md:flex md:flex-row md:items-center justify-between gap-4 w-full">
+        {/* Title & Subtitle - Aligned Left */}
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
             Forge
           </h1>
-          <p className="text-sm text-slate-500 font-medium mt-0.5">
+          <p className="text-xs sm:text-sm font-medium text-slate-400 mt-0.5">
             Podcast Episode 12
           </p>
         </div>
@@ -45,9 +45,10 @@ export function ForgeHeader() {
         <Link href="/lens">
           <Button
             type="button"
-            className="px-5 py-2.5 text-sm font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all whitespace-nowrap"
+            className="w-auto shrink-0 inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-[#5D5FEF] hover:bg-[#4B4DDC] text-white shadow-xs transition-all whitespace-nowrap cursor-pointer"
           >
-            Continue to Lens →
+            <span>Continue to Lens</span>
+            <span>&rarr;</span>
           </Button>
         </Link>
       </div>

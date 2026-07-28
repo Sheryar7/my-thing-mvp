@@ -21,8 +21,8 @@ export function ArchiveHeader({ searchQuery, setSearchQuery }: ArchiveHeaderProp
 
       <div className="hidden md:flex items-center justify-between gap-4 w-full mb-5">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">The Archive</h1>
-          <p className="text-sm text-slate-500 mt-1">Manage research and sources for all your projects.</p>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">The Archive</h1>
+          <p className="text-xs sm:text-sm font-medium text-slate-400 mt-0.5">Manage research and sources for all your projects.</p>
         </div>
 
         <Button

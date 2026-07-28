@@ -23,8 +23,12 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
    * Determines if the global mobile top header should be hidden based on the active path.
    */
   const shouldHideMobileHeader = () => {
-    // Hide on Workshop & Forge root pages
-    if (pathname.startsWith("/workshop") || pathname.startsWith("/forge")) {
+    // Hide on Workshop, Forge & Lens root pages
+    if (
+      pathname.startsWith("/workshop") || 
+      pathname.startsWith("/forge") ||
+      pathname.startsWith("/lens")
+    ) {
       return true;
     }
     // Hide on Archive detail sub-routes (e.g., /archive/podcast-10, /archive/podcast-10/src-1)
@@ -46,27 +50,35 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
 
         {/* MOBILE TOP NAVIGATION BAR - Conditional Layer */}
         {!hideHeader && (
-          <div className="md:hidden fixed top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md px-5 py-3.5 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 hover:bg-slate-100 p-2 text-slate-700 transition-colors">
-                <HiOutlineMenu className="w-5 h-5" />
-              </button>
-              <span className="text-lg font-bold text-slate-900 tracking-tight">MyThing</span>
-            </div>
+  <div className="md:hidden fixed top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md px-5 py-3.5 flex items-center justify-between">
+    {/* Left Action: Hamburger Menu */}
+    <div className="flex items-center w-1/4">
+      <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 hover:bg-slate-100 p-2 text-slate-700 transition-colors">
+        <HiOutlineMenu className="w-5 h-5" />
+      </button>
+    </div>
 
-            <div className="flex items-center gap-3">
-              <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 p-2 text-slate-400 hover:text-slate-600 relative">
-                <IoNotificationsOutline className="w-5.5 h-5.5" />
-                <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-violet-600 rounded-full" />
-              </button>
-              <img
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sherry"
-                alt="User profile"
-                className="w-9 h-9 rounded-full object-cover border border-slate-100"
-              />
-            </div>
-          </div>
-        )}
+    {/* Center Title: MyThing */}
+    <div className="flex-1 text-center">
+      <span className="text-lg font-bold text-slate-900 tracking-tight">
+        MyThing
+      </span>
+    </div>
+
+    {/* Right Action: Notifications & Avatar */}
+    <div className="flex items-center justify-end gap-3 w-1/4">
+      <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 p-2 text-slate-400 hover:text-slate-600 relative">
+        <IoNotificationsOutline className="w-5.5 h-5.5" />
+        <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-violet-600 rounded-full" />
+      </button>
+      <img
+        src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sherry"
+        alt="User profile"
+        className="w-9 h-9 rounded-full object-cover border border-slate-100"
+      />
+    </div>
+  </div>
+)}
 
         {/* DYNAMIC VIEW ROUTE DISPLAY SYSTEM */}
         <main

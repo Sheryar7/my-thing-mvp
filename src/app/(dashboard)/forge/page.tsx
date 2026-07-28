@@ -38,7 +38,7 @@ export default function ForgePage() {
   return (
     <div className="w-full min-h-screen space-y-6 md:space-y-8 bg-transparent p-4 md:p-0 pb-24 md:pb-6 font-sans antialiased">
       <ForgeHeader />
-      
+
       {/* On mobile: Script Preview shows above Output Selector (as per Figma) */}
       <div className="flex flex-col md:hidden gap-6">
         <ScriptPreview />
