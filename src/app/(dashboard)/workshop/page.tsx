@@ -12,9 +12,13 @@ import { FiArrowLeft, FiSave } from "react-icons/fi";
 import { HiArrowLeft } from "react-icons/hi";
 
 export default function WorkshopPage() {
+  // Active workspace ID target for Supabase RAG queries
+  const WORKSPACE_ID = "8f11ccc8-308b-43a1-a8ad-2d7f727176df";
+
   // The page keeps editor and prompt state local so the writing canvas and assistant stay in sync without prop drilling.
   const [editorText, setEditorText] = useState("");
   const [prompt, setPrompt] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // These handlers are intentionally lightweight placeholders so the workshop shell is fully wired before the backend integration is added.
   const handleSaveDraft = () => {
@@ -27,6 +31,41 @@ export default function WorkshopPage() {
 
   const handleExecuteQuickAction = (actionKey: string) => {
     console.log(`Executing instant action: ${actionKey}`);
+  };
+
+  // Handles submitting the prompt to the RAG endpoint (/api/query)
+  const handleAIGenerate = async () => {
+    if (!prompt.trim() || isLoading) return;
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question: prompt,
+          workspaceId: WORKSPACE_ID,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.answer) {
+        // Appends generated RAG response directly to the RichEditor state
+        setEditorText((prevText) =>
+          prevText ? `${prevText}\n\n${data.answer}` : data.answer
+        );
+        setPrompt(""); // Clear input after successful generation
+      } else {
+        alert("Generation failed: " + (data.error || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("RAG Generation Error:", error);
+      alert("Something went wrong connecting to the RAG engine.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -98,7 +137,9 @@ export default function WorkshopPage() {
           <AIAssistant
             prompt={prompt}
             onChange={setPrompt}
-            onSubmit={() => console.log("Submitting prompt:", prompt)}
+            onSubmit={handleAIGenerate}
+            isLoading={isLoading}
+            workspaceId={WORKSPACE_ID}
           />
           <SourceDrawer />
           <QuickActions onActionTrigger={handleExecuteQuickAction} />

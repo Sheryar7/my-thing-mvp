@@ -28,7 +28,13 @@ export default function Sidebar() {
   return (
     <aside className="w-60 sticky top-0 h-screen bg-white border-r border-[#E2E8F0] hidden md:flex flex-col p-6 justify-between shrink-0">
       <div className="flex flex-col gap-8">
-        <div className="text-2xl font-bold text-slate-900 px-3 tracking-tight">MyThing</div>
+        {/* Brand Logo / Home Link */}
+        <Link
+          href="/"
+          className="text-xl font-bold text-slate-900 px-3 tracking-tight hover:opacity-80 transition-opacity w-fit"
+        >
+          MyThing
+        </Link>
 
         <nav className="flex flex-col gap-1">
           {navItems.map((item) => {
