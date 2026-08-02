@@ -1,34 +1,15 @@
 {
-  "name": "my-thing-mvp",
-  "version": "0.1.0",
+  "name": "my-thing-mvp-workspace",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@google/genai": "^2.15.0",
-    "@langchain/textsplitters": "^1.0.1",
-    "@supabase/supabase-js": "^2.109.0",
-    "clsx": "^2.1.1",
-    "langchain": "^1.5.4",
-    "lucide-react": "^1.23.0",
-    "next": "16.2.9",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "react-icons": "^5.7.0",
-    "tailwind-merge": "^3.6.0"
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "npm run dev --prefix my-thing-frontend",
+    "dev:backend": "npm run start:dev --prefix my-thing-backend",
+    "build:frontend": "npm run build --prefix my-thing-frontend",
+    "build:backend": "npm run build --prefix my-thing-backend"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.9",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "concurrently": "^8.2.2"
   }
 }
