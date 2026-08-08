@@ -5,12 +5,13 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 
 
+
 import { ForgeAIAssistant } from "./_components/ForgeAIAssistant";
 import { DocumentStatus } from "./_components/document-status";
 import { LiveTeleprompter } from "./_components/live-teleprompter";
 
-import { Collaborators } from "./_components/collaborator";
-import { VersionHistory } from "./_components/version-history";
+import { Collaborators } from "@/app/(dashboard)/workshop/_components/collaborators";
+import { VersionHistory } from "@/app/(dashboard)/workshop/_components/version-history";
 
 import { HiArrowLeft } from "react-icons/hi";
 import { PlaybackControls } from "./_components/playback-controls";
@@ -24,9 +25,9 @@ export default function ForgePage() {
   const handleExport = () => console.log("Opening export modal...");
 
   return (
-    <div className="w-full space-y-6 font-sans antialiased">
+    <div className="p-6 lg:p-8 max-w-7xl mx-auto w-full">
       {/* HEADER SECTION */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div className="space-y-1.5">
           <Link
             href="/dashboard"
@@ -41,12 +42,12 @@ export default function ForgePage() {
               Podcast Episode 12
             </h1>
             <p className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
-              Ready for recording • Synced with Workshop 1 minute ago
+              18 Sources • Last synced 1 minute ago
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-3">
           <Button
             type="button"
             variant="outline"
@@ -77,35 +78,29 @@ export default function ForgePage() {
 
 
 
-      {/* /* Main 2-Column Grid Layout */}
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch w-full">
-  {/* Left Column: Outer container uses flex-col justify-between */}
-  <div className="lg:col-span-2 flex flex-col justify-between h-full space-y-6">
-    {/* LiveTeleprompter takes grow priority */}
-    <div className="flex-1 flex flex-col">
-      <LiveTeleprompter />
-    </div>
+      {/* Main 2-Column Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Left Main Column (Teleprompter + Controls) */}
+        <div className="lg:col-span-8">
+          <div className="flex flex-col gap-6 w-full max-w-3xl">
+            <LiveTeleprompter />
+            <PlaybackControls />
+          </div>
+        </div>
 
-    {/* PlaybackControls stays pinned at bottom */}
-    <div className="shrink-0">
-      <PlaybackControls />
-    </div>
-  </div>
+        {/* Right Sidebar Column */}
+        <div className="lg:col-span-4">
+          <div className="flex flex-col gap-6 w-full">
+            <DocumentStatus />
 
-  {/* Right Sidebar Column */}
-  <div className="flex flex-col justify-between h-full space-y-6 w-full">
-    <div className="space-y-4">
-      <DocumentStatus />
-      <ForgeAIAssistant />
-      <Collaborators />
-    </div>
+            <ForgeAIAssistant />
 
-    {/* VersionHistory stays pinned at bottom */}
-    <div className="shrink-0">
-      <VersionHistory />
-    </div>
-  </div>
-</div>
+            <Collaborators />
+
+            <VersionHistory />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

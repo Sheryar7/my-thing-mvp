@@ -1,17 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { FiGlobe, FiFile, FiBookOpen } from "react-icons/fi";
-import { FaChevronRight } from "react-icons/fa6";
+import { FiGlobe, FiPlay, FiFileText, FiMoreVertical, FiCheck } from "react-icons/fi";
 
 export interface SourceItemData {
   id: string;
   title: string;
-  type: "Website" | "PDF" | "Notes";
+  type: "Website" | "PDF" | "Notes" | "Video";
   label: string;
   pagesCount?: number;
   updatedLabel: string;
+  duration?: string;
+  aiStatus?: string;
+  includeInScript?: boolean;
 }
 
 interface SourceItemCardProps {
@@ -20,70 +22,110 @@ interface SourceItemCardProps {
 }
 
 export function SourceItemCard({ source, projectId }: SourceItemCardProps) {
-  
-  // Custom asset icons mapper based on dynamic document schemas
-  const getSourceIcon = (type: string) => {
-    if (type === "Website") return <FiGlobe className="w-5 h-5 text-emerald-600" />;
-    if (type === "PDF") return <FiFile className="w-5 h-5 text-blue-600" />;
-    return <FiBookOpen className="w-5 h-5 text-amber-600" />;
+  const [included, setIncluded] = useState(source.includeInScript ?? true);
+
+  // Dynamic AI status helper based on type if not provided
+  const getAiStatus = () => {
+    if (source.aiStatus) return source.aiStatus;
+    if (source.type === "Website") return "AI summarized ✓";
+    if (source.type === "Video") return "Transcript Generated ✓";
+    if (source.type === "PDF") return "Summary Available ✓";
+    return "AI Analyzed ✓";
   };
 
-  // Custom pill class conditional configurations
-  const getBadgeStyle = (type: string) => {
-    if (type === "Website") return "bg-emerald-50 text-emerald-600 border-emerald-100/30";
-    if (type === "PDF") return "bg-blue-50 text-blue-600 border-blue-100/30";
-    return "bg-amber-50 text-amber-600 border-amber-100/30";
+  // Render type-specific icon with purple circular background matching Figma
+  const getSourceIcon = () => {
+    if (source.type === "Website") {
+      return <FiGlobe className="w-5 h-5 text-indigo-900" />;
+    }
+    if (source.type === "Video") {
+      return <FiPlay className="w-5 h-5 text-indigo-900 ml-0.5" />;
+    }
+    return (
+      <div className="flex flex-col items-center justify-center text-indigo-900">
+        <FiFileText className="w-4 h-4" />
+        <span className="text-[8px] font-black leading-none mt-[1px]">PDF</span>
+      </div>
+    );
   };
 
   return (
-    <div className="group relative bg-white border border-slate-200/90 hover:border-slate-300 rounded-2xl p-4 flex items-center justify-between shadow-sm transition-all duration-150 w-full min-h-[76px]">
+    <div className="group relative bg-white border border-slate-200/80 hover:border-indigo-300 rounded-2xl p-5 shadow-xs transition-all duration-200 flex flex-col justify-between w-full">
       
-      {/* Content Cluster Blocks Layout */}
-      <div className="flex items-center gap-4 min-w-0">
-        {/* Left Side Styled Media Circle Icon Asset Wrapper Box */}
-        <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${
-          source.type === "Website" ? "bg-emerald-50" : 
-          source.type === "PDF" ? "bg-blue-50" : "bg-amber-50"
-        }`}>
-          {getSourceIcon(source.type)}
+      {/* Top Main Row */}
+      <div className="flex items-start justify-between gap-3">
+        {/* Left Icon Container */}
+        <div className="w-12 h-12 rounded-full bg-[#EEECFE] flex items-center justify-center shrink-0">
+          {getSourceIcon()}
         </div>
 
-        {/* Text Details Description Cluster */}
-        <div className="flex flex-col min-w-0">
-          <h4 className="font-bold text-slate-900 tracking-tight text-[15px] group-hover:text-indigo-600 transition-colors truncate">
+        {/* Center Details Block */}
+        <div className="flex flex-col min-w-0 flex-1 pt-0.5">
+          <h4 className="font-bold text-slate-900 text-sm tracking-tight leading-snug truncate group-hover:text-indigo-800 transition-colors">
             {source.title}
           </h4>
           
-          <div className="flex items-center gap-2 mt-1 flex-wrap">
-            {/* Context Sub-Label Tag Badge Component Layout */}
-            <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 border rounded-md leading-none ${getBadgeStyle(source.type)}`}>
-              {source.label}
-            </span>
-            {source.pagesCount && (
-              <span className="text-xs text-slate-400 font-medium leading-none">
-                • {source.pagesCount} pages
-              </span>
-            )}
-            <span className="text-xs text-slate-400 font-medium leading-none">
-              • {source.updatedLabel}
-            </span>
-          </div>
+          <p className="text-[11px] text-slate-400 font-medium mt-1">
+            {source.label}
+          </p>
+
+          <p className="text-[11px] text-slate-400 font-medium leading-tight">
+            {source.duration ? source.duration : source.pagesCount ? `${source.pagesCount} Pages` : source.updatedLabel}
+          </p>
         </div>
+
+        {/* Right 3-Dots Menu Icon */}
+        <button 
+          type="button" 
+          aria-label="Options"
+          className="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-lg hover:bg-slate-100/80 shrink-0 relative z-20"
+        >
+          <FiMoreVertical className="w-4 h-4" />
+        </button>
       </div>
 
-      {/* Right Side Functional Target Action Chevron Pointer */}
-      <div className="text-slate-300 group-hover:text-slate-500 transition-colors shrink-0 pl-2">
-        <FaChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
+      {/* Middle AI Status Badge Pill */}
+      <div className="mt-4">
+        <span className="inline-flex items-center text-[10px] font-bold text-indigo-900 bg-[#EEECFE] px-2.5 py-1 rounded-lg">
+          {getAiStatus()}
+        </span>
       </div>
 
-      {/* 
-        * DEVELOPERS NOTE FOR NEXT-STEP DEPLOYMENT:
-        * This overlay mask targets the final sub-detail view path screen segment template.
-        * Structure handles passing tracking flags via nested URL slugs.
-        */}
+      {/* Subtle Divider Line */}
+      <div className="w-full h-[1px] bg-slate-100 my-3" />
+
+      {/* Bottom Footer Checkbox Line */}
+      <div className="flex items-center gap-2 relative z-20">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIncluded(!included);
+          }}
+          className={`w-4 h-4 rounded border flex items-center justify-center transition-colors cursor-pointer ${
+            included 
+              ? "bg-indigo-600 border-indigo-600 text-white" 
+              : "border-slate-300 bg-white hover:border-indigo-400"
+          }`}
+        >
+          {included && <FiCheck className="w-3 h-3 stroke-[3]" />}
+        </button>
+
+        <span 
+          onClick={(e) => {
+            e.stopPropagation();
+            setIncluded(!included);
+          }} 
+          className="text-[11px] font-semibold text-slate-500 hover:text-slate-900 cursor-pointer select-none"
+        >
+          Include in Script
+        </span>
+      </div>
+
+      {/* Overlay Link to navigate to source sub-detail */}
       <Link 
         href={`/archive/${projectId}/${source.id}`}
-        className="absolute inset-0 rounded-2xl z-10 cursor-pointer"
+        className="absolute inset-0 rounded-2xl z-10"
         aria-label={`Open details for ${source.title}`}
       />
     </div>

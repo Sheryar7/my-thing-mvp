@@ -4,58 +4,106 @@ import React, { useState } from "react";
 import { ArchiveHeader } from "./_components/archive-header";
 import { ArchiveFilterBar } from "./_components/archive-filter-bar";
 import { ProjectCard, ProjectData } from "./_components/project-card";
-import { FloatingActionButton } from "@/components/ui/FloatingActionButton"; // Adjust this path if your file is saved elsewhere!
+import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
+import { DashboardPageHeader } from "../_components/dashboard-page-header";
 
-// Mock collections updated with exact Figma item counters
+// High-fidelity Mock Data matching the new Figma design
 const MOCK_PROJECTS: ProjectData[] = [
-  { 
-    id: "podcast-10", 
-    name: "Podcast Episode 10", 
-    sourcesCount: 18, 
-    notesCount: 12, 
-    updatedAtLabel: "Updated 2h ago", 
-    status: "Active" 
+  {
+    id: "podcast-12",
+    name: "Podcast Episode 12",
+    category: "Podcast Production",
+    sourcesCount: 18,
+    membersCount: 4,
+    aiStatus: "Ready for Script Generation",
+    updatedAtLabel: "Updated 2h ago",
+    status: "Active",
+    collaborators: [
+      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
+      { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
+      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
+      { id: "4", name: "Mike", avatarUrl: "https://i.pravatar.cc/100?img=12" },
+    ],
   },
-  { 
-    id: "ai-documentary", 
-    name: "Ai Documentary", 
-    sourcesCount: 24, 
-    notesCount: 8, 
-    updatedAtLabel: "Updated yesterday", 
-    status: "Active" 
+  {
+    id: "ai-ethics",
+    name: "AI Ethics Research",
+    category: "Research",
+    sourcesCount: 25,
+    membersCount: 3,
+    aiStatus: "AI Summary Available",
+    updatedAtLabel: "Updated Yesterday",
+    status: "Active",
+    collaborators: [
+      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
+      { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
+      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
+    ],
   },
-  { 
-    id: "product-launch", 
-    name: "Product Launch", 
-    sourcesCount: 15, 
-    notesCount: 5, 
-    updatedAtLabel: "Updated 3 days ago", 
-    status: "Completed" 
+  {
+    id: "marketing-campaign",
+    name: "Marketing Campaign",
+    category: "Marketing",
+    sourcesCount: 12,
+    membersCount: 2,
+    aiStatus: "Ready for Script Generation",
+    updatedAtLabel: "Updated Today",
+    status: "Active",
+    collaborators: [
+      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
+      { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
+    ],
   },
-  { 
-    id: "mental-health", 
-    name: "Mental Health", 
-    sourcesCount: 31, 
-    notesCount: 19, 
-    updatedAtLabel: "Updated today", 
-    status: "Drafts" 
+  {
+    id: "startup-pitch",
+    name: "Startup Pitch",
+    category: "Presentation",
+    sourcesCount: 8,
+    membersCount: 5,
+    aiStatus: "AI Processing...",
+    updatedAtLabel: "Updated 3d ago",
+    status: "Drafts",
+    collaborators: [
+      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
+      { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
+      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
+      { id: "4", name: "David", avatarUrl: "https://i.pravatar.cc/100?img=3" },
+      { id: "5", name: "Emma", avatarUrl: "https://i.pravatar.cc/100?img=20" },
+    ],
   },
-  { 
-    id: "research-paper", 
-    name: "Research Paper", 
-    sourcesCount: 42, 
-    notesCount: 27, 
-    updatedAtLabel: "Updated last week", 
-    status: "Completed" 
+  {
+    id: "healthcare-report",
+    name: "Healthcare Report",
+    category: "Research",
+    sourcesCount: 32,
+    membersCount: 6,
+    aiStatus: "Script Generated",
+    updatedAtLabel: "Updated 5d ago",
+    status: "Completed",
+    collaborators: [
+      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
+      { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
+      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
+      { id: "4", name: "David", avatarUrl: "https://i.pravatar.cc/100?img=3" },
+      { id: "5", name: "Emma", avatarUrl: "https://i.pravatar.cc/100?img=20" },
+      { id: "6", name: "Michael", avatarUrl: "https://i.pravatar.cc/100?img=15" },
+    ],
   },
-  { 
-    id: "youtube-automation", 
-    name: "YouTube Automation", 
-    sourcesCount: 21, 
-    notesCount: 14, 
-    updatedAtLabel: "Updated 5h ago", 
-    status: "Drafts" 
-  }
+  {
+    id: "product-launch",
+    name: "Product Launch Campaign",
+    category: "Campaign",
+    sourcesCount: 20,
+    membersCount: 3,
+    aiStatus: "Ready for Script Generation",
+    updatedAtLabel: "Updated 1w ago",
+    status: "Completed",
+    collaborators: [
+      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
+      { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
+      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
+    ],
+  },
 ];
 
 export default function ArchivePage() {
@@ -63,20 +111,27 @@ export default function ArchivePage() {
   const [activeTab, setActiveTab] = useState<"All" | "Active" | "Completed" | "Drafts">("All");
 
   const handleCreateProject = () => {
-    console.log("Create new project initialized from FAB!");
-    // Your actual modal opening or router pushing logic goes here
+    console.log("Create new project initialized!");
   };
 
+  const handleMenuClick = (projectId: string) => {
+    console.log("Opened context menu for project:", projectId);
+  };
+
+  // Filter projects by both search query and status tab
   const filteredProjects = MOCK_PROJECTS.filter((project) => {
-    const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.category.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTab = activeTab === "All" || project.status === activeTab;
     return matchesSearch && matchesTab;
   });
 
   return (
-    <div className="space-y-8 w-full min-h-screen p-2 md:p-0 bg-transparent font-sans antialiased relative">
-      {/* Search and Action Bar */}
-      <ArchiveHeader searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+    <div className="space-y-8 w-full font-sans antialiased">
+      <DashboardPageHeader>
+        <ArchiveHeader searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      </DashboardPageHeader>
 
       {/* Tabs Filter Section */}
       <ArchiveFilterBar activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -89,12 +144,15 @@ export default function ArchivePage() {
             Total: {filteredProjects.length}
           </span>
         </div>
-        
+
         {filteredProjects.length > 0 ? (
-          /* Custom 3-column clean grid system layout frame constraint */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onMenuClick={handleMenuClick}
+              />
             ))}
           </div>
         ) : (
@@ -104,11 +162,10 @@ export default function ArchivePage() {
         )}
       </div>
 
-      {/* MOBILE FLOATING ACTION BUTTON (FAB): Renders only on mobile screens */}
-      
-      <FloatingActionButton 
-        onClick={handleCreateProject} 
-        ariaLabel="Create new project" 
+      {/* Mobile Floating Action Button */}
+      <FloatingActionButton
+        onClick={handleCreateProject}
+        ariaLabel="Create new project"
       />
     </div>
   );

@@ -25,7 +25,7 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
   const shouldHideMobileHeader = () => {
     // Hide on Workshop, Forge & Lens root pages
     if (
-      pathname.startsWith("/workshop") || 
+      pathname.startsWith("/workshop") ||
       pathname.startsWith("/forge") ||
       pathname.startsWith("/lens")
     ) {
@@ -50,42 +50,41 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
 
         {/* MOBILE TOP NAVIGATION BAR - Conditional Layer */}
         {!hideHeader && (
-  <div className="md:hidden fixed top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md px-5 py-3.5 flex items-center justify-between">
-    {/* Left Action: Hamburger Menu */}
-    <div className="flex items-center w-1/4">
-      <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 hover:bg-slate-100 p-2 text-slate-700 transition-colors">
-        <HiOutlineMenu className="w-5 h-5" />
-      </button>
-    </div>
+          <div className="md:hidden fixed top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md px-5 py-3.5 flex items-center justify-between">
+            {/* Left Action: Hamburger Menu */}
+            <div className="flex items-center w-1/4">
+              <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 hover:bg-slate-100 p-2 text-slate-700 transition-colors">
+                <HiOutlineMenu className="w-5 h-5" />
+              </button>
+            </div>
 
-    {/* Center Title: MyThing */}
-    <div className="flex-1 text-center">
-      <span className="text-lg font-bold text-slate-900 tracking-tight">
-        MyThing
-      </span>
-    </div>
+            {/* Center Title: MyThing */}
+            <div className="flex-1 text-center">
+              <span className="text-lg font-bold text-slate-900 tracking-tight">
+                MyThing
+              </span>
+            </div>
 
-    {/* Right Action: Notifications & Avatar */}
-    <div className="flex items-center justify-end gap-3 w-1/4">
-      <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 p-2 text-slate-400 hover:text-slate-600 relative">
-        <IoNotificationsOutline className="w-5.5 h-5.5" />
-        <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-violet-600 rounded-full" />
-      </button>
-      <img
-        src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sherry"
-        alt="User profile"
-        className="w-9 h-9 rounded-full object-cover border border-slate-100"
-      />
-    </div>
-  </div>
-)}
+            {/* Right Action: Notifications & Avatar */}
+            <div className="flex items-center justify-end gap-3 w-1/4">
+              <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 p-2 text-slate-400 hover:text-slate-600 relative">
+                <IoNotificationsOutline className="w-5.5 h-5.5" />
+                <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-violet-600 rounded-full" />
+              </button>
+              <img
+                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sherry"
+                alt="User profile"
+                className="w-9 h-9 rounded-full object-cover border border-slate-100"
+              />
+            </div>
+          </div>
+        )}
 
         {/* DYNAMIC VIEW ROUTE DISPLAY SYSTEM */}
         <main
-          className={`flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 md:p-8 lg:p-12 pb-32 md:pb-8 w-full ${
-            hideHeader ? "pt-4" : "pt-20"
-          } md:pt-8`}
+          className="flex-1 min-h-0 overflow-y-auto w-full max-w-7xl mx-auto px-6 md:px-10 pt-10 md:pt-12 pb-12"
         >
+          {!hideHeader && <div className="h-20 md:hidden" />}
           {children}
         </main>
 
@@ -94,9 +93,8 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
           <div className="grid grid-cols-5 gap-1 max-w-md mx-auto">
             <Link
               href="/dashboard"
-              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
-                isTabActive("/dashboard") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/dashboard") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+                }`}
             >
               <GrHomeRounded className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Home</span>
@@ -104,9 +102,8 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
 
             <Link
               href="/archive"
-              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
-                isTabActive("/archive") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/archive") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+                }`}
             >
               <IoArchiveOutline className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Archive</span>
@@ -114,9 +111,8 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
 
             <Link
               href="/workshop"
-              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
-                isTabActive("/workshop") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/workshop") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+                }`}
             >
               <LuPenLine className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Workshop</span>
@@ -124,9 +120,8 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
 
             <Link
               href="/forge"
-              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
-                isTabActive("/forge") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/forge") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+                }`}
             >
               <IoMicOutline className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Forge</span>
@@ -134,9 +129,8 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
 
             <Link
               href="/lens"
-              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${
-                isTabActive("/lens") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
-              }`}
+              className={`inline-flex flex-col items-center justify-center gap-1 py-1 transition-all ${isTabActive("/lens") ? "text-indigo-600 font-semibold" : "text-slate-400 font-medium"
+                }`}
             >
               <IoCheckmark className="w-5 h-5" />
               <span className="text-[11px] tracking-wide">Lens</span>

@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
-    "dev:frontend": "npm run dev --prefix my-thing-frontend",
-    "dev:backend": "npm run start:dev --prefix my-thing-backend",
-    "build:frontend": "npm run build --prefix my-thing-frontend",
-    "build:backend": "npm run build --prefix my-thing-backend"
+    "dev:frontend": "npm --prefix my-thing-frontend run dev",
+    "dev:backend": "npm --prefix my-thing-backend run start:dev",
+    "build:frontend": "npm --prefix my-thing-frontend run build",
+    "build:backend": "npm --prefix my-thing-backend run build"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

@@ -7,6 +7,7 @@ import { DashboardLayout } from "./_components/dashboard-layout";
 import { QuickStats } from "./_components/quick-stats";
 import { RecentProjectsTable } from "./_components/recent-projects-table";
 import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
+import { DashboardPageHeader } from "../_components/dashboard-page-header";
 
 export default function DashboardPage() {
   const handleCreateProject = () => {
@@ -15,8 +16,9 @@ export default function DashboardPage() {
   };
   return (
     <DashboardLayout>
-      {/* Primary dashboard header */}
-      <Header />
+      <DashboardPageHeader>
+        <Header />
+      </DashboardPageHeader>
 
       {/* Summary row: active project and workflow overview */}
       <div className="grid gap-8">
