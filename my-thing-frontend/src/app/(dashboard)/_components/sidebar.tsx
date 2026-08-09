@@ -14,6 +14,7 @@ export default function Sidebar() {
   // Smart checking to handle nested routes correctly
   const isActive = (href: string) => {
     if (href === "/dashboard") return pathname === "/dashboard";
+    if (href === "/lens") return pathname.startsWith("/lens") || pathname.startsWith("/export-publish");
     return pathname.startsWith(href);
   };
 
@@ -29,6 +30,7 @@ export default function Sidebar() {
     <aside className="w-60 sticky top-0 h-screen bg-white border-r border-[#E2E8F0] hidden md:flex flex-col p-6 justify-between shrink-0">
       <div className="flex flex-col gap-8">
         {/* Brand Logo / Home Link */}
+
         <Link
           href="/"
           className="text-xl font-bold text-slate-900 px-3 tracking-tight hover:opacity-80 transition-opacity w-fit"

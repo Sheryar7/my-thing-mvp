@@ -24,6 +24,7 @@ export default function LensPage() {
             {/* Box 4 */}
             <ContentPreview />
 
+            {/* Mobile Export Button (Visible on Mobile Only) */}
             <div className="block sm:hidden w-full pt-2">
                 <Button
                     type="button"

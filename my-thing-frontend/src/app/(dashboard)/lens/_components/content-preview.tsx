@@ -33,14 +33,14 @@ export function ContentPreview({
       </div>
 
       {/* Content Container: Plain layout on mobile, bordered box on desktop */}
-      <div className="w-full border-0 bg-transparent p-0 shadow-none sm:border sm:border-slate-200 sm:bg-slate-50/50 sm:rounded-xl sm:p-5 flex flex-col justify-between">
+      <div className="w-full border-0 bg-transparent p-0 shadow-none sm:border sm:border-slate-200 sm:bg-white sm:rounded-xl sm:p-5 flex flex-col justify-between">
         <div>
           <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight mb-2">
             {title}
           </h3>
 
           {/* Line clamp for mobile (3 lines + ellipsis), full text on desktop */}
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
+          <p className="text-xs sm:text-sm text-slate-900 leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
             {excerpt}
           </p>
         </div>

@@ -41,7 +41,7 @@ export function LensHeader({
       </div>
 
       {/* Export Action (Visible on Desktop Only) */}
-      <div className="hidden sm:block">
+      {/* <div className="hidden sm:block">
         <Button
           type="button"
           onClick={onExport}
@@ -50,7 +50,7 @@ export function LensHeader({
           <span>Export</span>
           <span className="ml-1">&rarr;</span>
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }
