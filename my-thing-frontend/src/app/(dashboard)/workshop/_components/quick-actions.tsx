@@ -44,7 +44,7 @@ export function QuickActions({ onActionTrigger }: QuickActionsProps) {
   ];
 
   return (
-    <div className="bg-white border border-slate-200/80 rounded-[20px] p-5 shadow-sm space-y-3.5">
+    <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm space-y-3.5">
       {/* 1. ACTION GROUP HEADER */}
       <h3 className="font-bold text-slate-800 text-sm tracking-wide">Quick Actions</h3>
 

@@ -94,7 +94,7 @@ export function AIAssistant({
   };
 
   return (
-    <div className="bg-white border border-slate-200/90 rounded-[20px] p-5 shadow-xs space-y-4">
+    <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs space-y-4">
       {/* Title */}
       <div className="space-y-0.5">
         <div className="flex items-center gap-2 text-slate-900 font-bold text-sm tracking-wide">

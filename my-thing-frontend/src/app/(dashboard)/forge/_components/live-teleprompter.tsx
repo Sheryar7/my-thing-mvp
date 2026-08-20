@@ -14,7 +14,7 @@ export function LiveTeleprompter() {
                 </span>
                 <button
                     type="button"
-                    className="text-slate-400 hover:text-slate-700 transition cursor-pointer p-1"
+                    className="hidden sm:inline-flex text-slate-400 hover:text-slate-700 transition cursor-pointer p-1"
                     title="Fullscreen"
                 >
                     <FiMaximize2 className="w-4 h-4" />

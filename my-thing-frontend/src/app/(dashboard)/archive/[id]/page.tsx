@@ -3,7 +3,9 @@
 import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { FiSearch, FiArrowLeft, FiPlus } from "react-icons/fi";
+import { FiSearch, FiPlus } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
+import { HiArrowLeft } from "react-icons/hi";
 import { SourceItemCard, SourceItemData } from "./_components/source-item-card";
 import { ProjectCollaborators } from "./_components/project-collaborators";
 import { AIProjectInsights } from "./_components/ai-project-insights";
@@ -44,20 +46,30 @@ export default function ProjectSubViewPage() {
   });
 
   return (
-    <div className="w-full space-y-6 font-sans antialiased pb-12">
+    <div className="w-full max-w-full min-w-0 overflow-x-hidden space-y-6 font-sans antialiased pb-12">
       {/* 1. TOP HEADER & NAVIGATION */}
-      <div className="flex flex-col gap-3">
+      <div className="space-y-1.5">
+        {/* Visible on Desktop (>=768px), Hidden on Mobile */}
         <Link
           href="/archive"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors w-fit"
+          className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors w-fit"
         >
-          <FiArrowLeft className="w-3.5 h-3.5" />
+          <FiArrowLeft className="w-4 h-4" />
           <span>Back to Archive</span>
         </Link>
 
-        <div className="flex items-start justify-between w-full">
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between w-full gap-4 md:gap-0">
+          {/* Title & Subtitle Container */}
+          <div className="text-center md:text-left relative">
+            {/* Mobile Back Button Inline (Hidden on Desktop) */}
+            <Link
+              href="/archive"
+              className="md:hidden absolute left-0 top-1 text-slate-800 hover:text-indigo-600 p-1"
+            >
+              <HiArrowLeft className="w-4 h-4" />
+            </Link>
+
+            <h1 className="text-xl md:text-3xl font-bold tracking-tight text-slate-900 px-7 md:px-0">
               {projectData.name}
             </h1>
             <p className="text-xs text-slate-400 font-medium mt-1">
@@ -66,18 +78,18 @@ export default function ProjectSubViewPage() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-3">
+          <div className="grid grid-cols-2 md:flex items-center gap-3 w-full md:w-auto">
             <Button
               variant="outline"
-              className="w-auto h-9 px-4 border-indigo-400 text-indigo-600 hover:bg-indigo-50/60 font-bold"
+              className="w-full md:w-auto h-11 md:h-9 px-4 border-indigo-400 text-indigo-600 hover:bg-indigo-50/60 font-bold rounded-xl md:rounded-lg"
             >
-              <FiPlus className="w-3.5 h-3.5 stroke-[2.5]" />
+              <FiPlus className="w-4 h-4 md:w-3.5 md:h-3.5 stroke-[2.5]" />
               <span>Add Source</span>
             </Button>
 
             <Button
               variant="outline"
-              className="w-auto h-9 px-5 border-indigo-400 text-indigo-600 hover:bg-indigo-50/60 font-bold"
+              className="w-full md:w-auto h-11 md:h-9 px-5 border-indigo-400 text-indigo-600 hover:bg-indigo-50/60 font-bold rounded-xl md:rounded-lg"
             >
               Invite
             </Button>

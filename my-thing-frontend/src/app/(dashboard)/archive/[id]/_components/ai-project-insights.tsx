@@ -2,7 +2,7 @@
 
 import React from "react";
 import { HiSparkles } from "react-icons/hi2";
-import { FiCheckCircle } from "react-icons/fi";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 interface AIProjectInsightsProps {
   summary?: string;
@@ -27,7 +27,21 @@ export function AIProjectInsights({
           <HiSparkles className="w-5 h-5 text-amber-400" />
           <span>AI Project Insights</span>
         </div>
-        <p className="text-xs text-slate-400 font-medium mt-0.5">
+
+        {/* --- MOBILE ONLY SUB-HEADER WITH GUARANTEED SVG DOT --- */}
+        <div className="flex items-center gap-1.5 mt-1 md:hidden">
+          {/* SVG Green Dot ensuring fixed width & height */}
+          <svg className="w-2.5 h-2.5 text-light-green fill-current shrink-0" viewBox="0 0 8 8">
+            <circle cx="4" cy="4" r="4" />
+          </svg>
+          {/* Analysis Complete Text */}
+          <span className="text-xs font-semibold text-light-green">
+            Analysis complete
+          </span>
+        </div>
+
+        {/* --- DESKTOP ONLY SUB-HEADER (UNTOUCHED) --- */}
+        <p className="hidden md:block text-xs text-slate-400 font-medium mt-0.5">
           AI analyzed all uploaded sources and extracted the key information.
         </p>
       </div>
@@ -36,7 +50,10 @@ export function AIProjectInsights({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-1">
         {/* Summary Column */}
         <div>
-          <h4 className="text-sm font-bold text-indigo-800 mb-2">Summary</h4>
+          {/* Mobile uses larger bold title; Desktop retains untouched styling via md: prefix */}
+          <h4 className="text-base font-bold text-indigo-900 md:text-sm md:text-indigo-800 mb-2">
+            Summary
+          </h4>
           <p className="text-xs leading-relaxed text-slate-900 font-medium">
             {summary}
           </p>
@@ -44,7 +61,10 @@ export function AIProjectInsights({
 
         {/* Key Topics Column */}
         <div className="md:border-l border-slate-100 md:pl-6">
-          <h4 className="text-sm font-bold text-indigo-800 mb-2">Key Topics</h4>
+          {/* Mobile uses larger bold title; Desktop retains untouched styling via md: prefix */}
+          <h4 className="text-base font-bold text-indigo-900 md:text-sm md:text-indigo-800 mb-2">
+            Key Topics
+          </h4>
           <div className="flex flex-wrap gap-1.5">
             {keyTopics.map((topic) => (
               <span
@@ -57,14 +77,15 @@ export function AIProjectInsights({
           </div>
         </div>
 
-        {/* Research Status Column */}
-        <div className="md:border-l border-slate-100 md:pl-6 space-y-2">
+        {/* --- RESEARCH STATUS COLUMN (DESKTOP ONLY) --- */}
+        {/* Hidden on mobile (< md), completely untouched on desktop (>= md) */}
+        <div className="hidden md:block md:border-l border-slate-100 md:pl-6 space-y-2">
           <h4 className="text-sm font-bold text-indigo-800 mb-1">Research Status</h4>
           <p className="text-xs text-slate-900 font-medium">{sourcesIndexedCount} Sources Indexed</p>
           <p className="text-xs text-slate-900 font-medium">{summariesGeneratedCount} Summaries Generated</p>
           
-          <div className="pt-2 flex items-center gap-1.5 text-emerald-600 text-xs font-semibold">
-            <FiCheckCircle className="w-4 h-4 shrink-0" />
+          <div className="pt-1 flex items-center gap-1.5 text-light-green text-xs font-semibold">
+            <IoIosCheckmarkCircleOutline className="w-4 h-4 shrink-0" />
             <span>{researchStatus}</span>
           </div>
         </div>

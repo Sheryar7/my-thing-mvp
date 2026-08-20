@@ -48,53 +48,56 @@ export function RichEditor({
   }, [currentContent]);
 
   return (
-    <div className="bg-white border border-slate-200/90 rounded-[24px] p-6 md:p-8 shadow-xs h-full flex flex-col items-stretch">
+    <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 md:p-8 shadow-xs h-full flex flex-col items-stretch">
+
       {/* 1. TOOLBAR & HEADER */}
       <div className="space-y-5 flex-1 flex flex-col">
+
+        {/* AFTER */}
         {/* Formatting Toolbar */}
-        <div className="flex flex-wrap items-center justify-between border-b border-slate-100 pb-3 text-slate-500">
-          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3 text-slate-500 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-0.5 sm:gap-1.5 shrink-0">
             <div className="relative">
-              <select className="text-xs font-semibold text-slate-700 bg-slate-50/60 border border-slate-200/80 rounded-lg px-2.5 py-1.5 outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer pr-6">
+              <select className="text-[11px] sm:text-xs font-semibold text-slate-700 bg-slate-50/60 border border-slate-200/80 rounded-lg px-1.5 sm:px-2.5 py-1 sm:py-1.5 outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer pr-5 sm:pr-6">
                 <option>Heading 1</option>
                 <option>Heading 2</option>
                 <option>Paragraph</option>
               </select>
             </div>
 
-            <div className="h-4 w-px bg-slate-200 mx-1 hidden sm:block" />
+            <div className="h-4 w-px bg-slate-200 mx-0.5 sm:mx-1" />
 
-            <button type="button" className="p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
-              <FiBold className="w-4 h-4 text-slate-700" />
+            <button type="button" className="p-1 sm:p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
+              <FiBold className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700" />
             </button>
-            <button type="button" className="p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
-              <FiItalic className="w-4 h-4 text-slate-700" />
+            <button type="button" className="p-1 sm:p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
+              <FiItalic className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700" />
             </button>
-            <button type="button" className="p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
-              <FiUnderline className="w-4 h-4 text-slate-700" />
+            <button type="button" className="p-1 sm:p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
+              <FiUnderline className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700" />
             </button>
 
-            <div className="h-4 w-px bg-slate-200 mx-1 hidden sm:block" />
+            <div className="h-4 w-px bg-slate-200 mx-0.5 sm:mx-1" />
 
-            <button type="button" className="p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
-              <FiList className="w-4 h-4 text-slate-700" />
+            <button type="button" className="p-1 sm:p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
+              <FiList className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700" />
             </button>
-            <button type="button" className="p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
-              <BsListOl className="w-4 h-4 text-slate-700" />
+            <button type="button" className="p-1 sm:p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
+              <BsListOl className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700" />
             </button>
-            <button type="button" className="p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
-              <BsQuote className="w-4 h-4 text-slate-700" />
+            <button type="button" className="p-1 sm:p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
+              <BsQuote className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700" />
             </button>
-            <button type="button" className="p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
-              <FiLink className="w-4 h-4 text-slate-700" />
+            <button type="button" className="p-1 sm:p-1.5 hover:text-slate-900 hover:bg-slate-50 rounded transition cursor-pointer">
+              <FiLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700" />
             </button>
           </div>
 
-          <div className="flex items-center gap-1 text-slate-400">
-            <button type="button" className="p-1.5 hover:text-slate-700 hover:bg-slate-50 rounded transition cursor-pointer">
+          <div className="flex items-center gap-0.5 sm:gap-1 text-slate-400 shrink-0 ml-1">
+            <button type="button" className="p-1 sm:p-1.5 hover:text-slate-700 hover:bg-slate-50 rounded transition cursor-pointer">
               <FiRotateCcw className="w-3.5 h-3.5" />
             </button>
-            <button type="button" className="p-1.5 hover:text-slate-700 hover:bg-slate-50 rounded transition cursor-pointer">
+            <button type="button" className="p-1 sm:p-1.5 hover:text-slate-700 hover:bg-slate-50 rounded transition cursor-pointer">
               <FiRotateCw className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -134,7 +137,7 @@ export function RichEditor({
           </span>
         </div>
 
-        <div className="flex items-center gap-3 font-semibold text-slate-600">
+        <div className="hidden md:flex items-center gap-3 font-semibold text-slate-600">
           <span>{wordCount.toLocaleString()} words</span>
           <button type="button" className="hover:text-slate-900 transition cursor-pointer">
             <FiMaximize2 className="w-3.5 h-3.5 text-slate-500" />

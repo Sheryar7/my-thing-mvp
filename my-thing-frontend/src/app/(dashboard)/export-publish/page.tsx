@@ -20,8 +20,8 @@ export default function ExportPublishPage() {
   const [selectedDestination, setSelectedDestination] = useState("Spotify");
 
   return (
-    <div className="w-full space-y-6 md:space-y-8 font-sans antialiased">
-      {/* Header */}
+<div className="w-full max-w-full min-w-0 overflow-x-hidden space-y-6 font-sans antialiased pb-12">
+        {/* Header */}
       <div className="text-center sm:text-left w-full sm:w-auto">
         <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
           Export & Publish

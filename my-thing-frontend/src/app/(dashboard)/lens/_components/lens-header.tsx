@@ -24,7 +24,7 @@ export function LensHeader({
         aria-label="Back to dashboard"
         className="sm:hidden absolute left-0 top-1 p-1 text-slate-700 hover:text-slate-900 transition-colors"
       >
-        <HiArrowLeft className="w-5 h-5" />
+        <HiArrowLeft className="w-4 h-4" />
       </Link>
 
       {/* Centered Title & Subtitle on Mobile */}

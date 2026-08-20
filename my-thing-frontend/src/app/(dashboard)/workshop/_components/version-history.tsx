@@ -40,7 +40,7 @@ export function VersionHistory({
   onSelectVersion,
 }: VersionHistoryProps) {
   return (
-    <div className="bg-white border border-slate-200/90 rounded-[20px] p-5 shadow-xs space-y-3">
+    <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs space-y-3">
       <h3 className="text-sm font-bold text-slate-900 tracking-tight">
         Version History
       </h3>

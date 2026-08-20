@@ -3,9 +3,12 @@
 import React, { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { FiLoader } from "react-icons/fi";
+import { HiArrowLeft } from "react-icons/hi";
 import { IoSparklesOutline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 export default function ScriptProcessingView() {
+    const router = useRouter();
     const [progress, setProgress] = useState(85);
     const [steps] = useState([
         { label: "Reading 10 sources", status: "completed" },
@@ -16,13 +19,28 @@ export default function ScriptProcessingView() {
     ]);
 
     return (
-        <div className="w-full min-h-[80vh] flex flex-col items-center justify-center py-12 px-4 font-sans antialiased">
-            <div className="max-w-md w-full flex flex-col items-center text-center space-y-6">
+        <div className="w-full max-w-full min-w-0 overflow-x-hidden space-y-6 font-sans antialiased pb-12">
+            {/* Top Navigation Header styled exactly like DocumentHeader */}
+            <div className="w-full max-w-md relative flex flex-col items-center sm:items-start text-center sm:text-left mb-2 md:hidden">
+                <button
+                    type="button"
+                    onClick={() => router.back()}
+                    className="sm:hidden absolute left-0 top-1 text-slate-800 hover:text-indigo-600 transition-colors p-1"
+                    aria-label="Back to project"
+                >
+                    <HiArrowLeft className="w-4 h-4" />
+                </button>
 
-                {/* Animated AI Circle (Figma Pixel-Perfect Match) */}
-                <div className="relative w-28 h-28 flex items-center justify-center">
+                <h1 className="text-xl font-bold tracking-tight text-slate-900 px-8 sm:px-0">
+                    My Thing
+                </h1>
+            </div>
+
+            {/* AFTER */}
+            <div className="max-w-md w-full mx-auto flex flex-col items-center text-center space-y-5 md:space-y-6 md:py-8">
+                {/* Animated AI Circle */}
+                <div className="relative w-44 h-44 sm:w-50 sm:h-50 flex items-center justify-center">
                     <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                        {/* Background Track Circle */}
                         <circle
                             cx="50"
                             cy="50"
@@ -32,7 +50,6 @@ export default function ScriptProcessingView() {
                             stroke="currentColor"
                             fill="transparent"
                         />
-                        {/* Animated Progress Circle */}
                         <circle
                             cx="50"
                             cy="50"
@@ -47,7 +64,6 @@ export default function ScriptProcessingView() {
                         />
                     </svg>
 
-                    {/* Center Sparkles Icon */}
                     <div className="absolute inset-0 flex items-center justify-center text-indigo-600">
                         <IoSparklesOutline className="w-8 h-8 fill-indigo-600" />
                     </div>
@@ -63,14 +79,13 @@ export default function ScriptProcessingView() {
                     </p>
                 </div>
 
-                {/* Steps Card with Increased Vertical Spacing */}
+                {/* Steps Card */}
                 <div className="w-full bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs text-left divide-y divide-slate-100">
                     {steps.map((step, idx) => (
-                        <div 
-                            key={idx} 
-                            className={`flex items-center gap-3.5 ${
-                                idx === 0 ? "pb-4" : idx === steps.length - 1 ? "pt-4" : "py-4"
-                            }`}
+                        <div
+                            key={idx}
+                            className={`flex items-center gap-3.5 ${idx === 0 ? "pb-4" : idx === steps.length - 1 ? "pt-4" : "py-4"
+                                }`}
                         >
                             {step.status === "completed" && (
                                 <FaCheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
@@ -87,13 +102,12 @@ export default function ScriptProcessingView() {
                             )}
 
                             <span
-                                className={`text-xs md:text-sm font-medium ${
-                                    step.status === "completed"
-                                        ? "text-emerald-600"
-                                        : step.status === "active"
-                                            ? "text-indigo-600"
-                                            : "text-slate-600"
-                                }`}
+                                className={`text-xs md:text-sm font-medium ${step.status === "completed"
+                                    ? "text-emerald-500"
+                                    : step.status === "active"
+                                        ? "text-indigo-600"
+                                        : "text-slate-600"
+                                    }`}
                             >
                                 {step.label}
                             </span>

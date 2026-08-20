@@ -1,20 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import Button from "@/components/ui/Button";
-
-
+import { ForgeHeader } from "./_components/forge-header";
 import { ForgeAIAssistant } from "./_components/ForgeAIAssistant";
 import { DocumentStatus } from "./_components/document-status";
 import { LiveTeleprompter } from "./_components/live-teleprompter";
-
-import { Collaborators } from "./_components/collaborator";
+import { Collaborators } from "./_components/collaborators";
 import { VersionHistory } from "./_components/version-history";
-
-import { HiArrowLeft } from "react-icons/hi";
 import { PlaybackControls } from "./_components/playback-controls";
-
 
 export default function ForgePage() {
   const [prompt, setPrompt] = useState("");
@@ -24,88 +17,40 @@ export default function ForgePage() {
   const handleExport = () => console.log("Opening export modal...");
 
   return (
-    <div className="w-full space-y-6 font-sans antialiased">
-      {/* HEADER SECTION */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div className="space-y-1.5">
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition"
-          >
-            <HiArrowLeft className="w-4 h-4" />
-            <span>Back to Project</span>
-          </Link>
+    <div className="w-full max-w-full min-w-0 overflow-x-hidden space-y-6 font-sans antialiased pb-12">
+      {/* HEADER SECTION COMPONENT */}
+      <ForgeHeader
+        onSaveDraft={handleSaveDraft}
+        onExport={handleExport}
+        onStartRecording={handleStartRecording}
+      />
 
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
-              Podcast Episode 12
-            </h1>
-            <p className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
-              Ready for recording • Synced with Workshop 1 minute ago
-            </p>
+      {/* Main 2-Column Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch w-full">
+        {/* Left Column */}
+        <div className="lg:col-span-2 flex flex-col justify-between h-full space-y-6">
+          <div className="flex-1 flex flex-col">
+            <LiveTeleprompter />
+          </div>
+
+          <div className="shrink-0">
+            <PlaybackControls />
           </div>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handleSaveDraft}
-            className="w-auto px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-xl border border-indigo-600/70 text-indigo-600 bg-white hover:bg-indigo-50 transition"
-          >
-            Save
-          </Button>
+        {/* Right Sidebar Column */}
+        <div className="flex flex-col justify-between h-full space-y-6 w-full">
+          <div className="space-y-4">
+            <DocumentStatus />
+            <ForgeAIAssistant />
+            <Collaborators />
+          </div>
 
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handleExport}
-            className="w-auto px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-xl border border-indigo-600/70 text-indigo-600 bg-white hover:bg-indigo-50 transition"
-          >
-            Export
-          </Button>
-
-          <Button
-            type="button"
-            onClick={handleStartRecording}
-            className="w-auto px-5 py-2.5 text-xs sm:text-sm font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white transition shadow-sm"
-          >
-            Start Recording
-          </Button>
+          <div className="shrink-0">
+            <VersionHistory />
+          </div>
         </div>
       </div>
-
-
-
-      {/* /* Main 2-Column Grid Layout */}
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch w-full">
-  {/* Left Column: Outer container uses flex-col justify-between */}
-  <div className="lg:col-span-2 flex flex-col justify-between h-full space-y-6">
-    {/* LiveTeleprompter takes grow priority */}
-    <div className="flex-1 flex flex-col">
-      <LiveTeleprompter />
-    </div>
-
-    {/* PlaybackControls stays pinned at bottom */}
-    <div className="shrink-0">
-      <PlaybackControls />
-    </div>
-  </div>
-
-  {/* Right Sidebar Column */}
-  <div className="flex flex-col justify-between h-full space-y-6 w-full">
-    <div className="space-y-4">
-      <DocumentStatus />
-      <ForgeAIAssistant />
-      <Collaborators />
-    </div>
-
-    {/* VersionHistory stays pinned at bottom */}
-    <div className="shrink-0">
-      <VersionHistory />
-    </div>
-  </div>
-</div>
     </div>
   );
 }

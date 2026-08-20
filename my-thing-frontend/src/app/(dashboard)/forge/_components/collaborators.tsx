@@ -32,17 +32,17 @@ const DEFAULT_COLLABORATORS: Collaborator[] = [
         name: "Alexa",
         avatarUrl: "https://i.pravatar.cc/100?img=9",
     },
-    {
-        id: "4",
-        name: "David",
-        avatarUrl: "https://i.pravatar.cc/100?img=12",
-        status: "Viewing",
-    },
-    {
-        id: "5",
-        name: "Emma",
-        avatarUrl: "https://i.pravatar.cc/100?img=32",
-    },
+    // {
+    //     id: "4",
+    //     name: "David",
+    //     avatarUrl: "https://i.pravatar.cc/100?img=12",
+    //     status: "Viewing",
+    // },
+    // {
+    //     id: "5",
+    //     name: "Emma",
+    //     avatarUrl: "https://i.pravatar.cc/100?img=32",
+    // },
 ];
 
 // Sub-component to encapsulate state & click-outside ref safely

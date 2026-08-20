@@ -20,7 +20,7 @@ export function SourceDrawer({ sources, onToggleSource }: SourceDrawerProps) {
   const activeCount = sources.filter((s) => s.selected).length;
 
   return (
-    <div className="bg-white border border-slate-200/90 rounded-[20px] p-5 shadow-sm space-y-4">
+    <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-sm space-y-4">
       {/* 1. SOURCE LIST HEADER */}
       <div className="flex items-center justify-between">
         <h3 className="font-bold text-slate-800 text-sm tracking-wide">
@@ -37,7 +37,7 @@ export function SourceDrawer({ sources, onToggleSource }: SourceDrawerProps) {
           <div
             key={src.id}
             onClick={() => onToggleSource(src.id)}
-            className={`flex items-center justify-between p-3 border rounded-xl transition-all cursor-pointer ${
+            className={`flex items-center justify-between p-3 border rounded-2xl transition-all cursor-pointer ${
               src.selected
                 ? "bg-slate-50/80 border-slate-200"
                 : "bg-white border-slate-100 opacity-50"
@@ -45,11 +45,11 @@ export function SourceDrawer({ sources, onToggleSource }: SourceDrawerProps) {
           >
             <div className="flex items-center gap-3.5">
               {src.type === "Web" ? (
-                <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-emerald-600 shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-green-100 flex items-center justify-center text-emerald-600 shrink-0">
                   <FiGlobe className="w-5 h-5 stroke-[2.2]" />
                 </div>
               ) : (
-                <div className="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
                   <FiFileText className="w-5 h-5 stroke-[2.2]" />
                 </div>
               )}

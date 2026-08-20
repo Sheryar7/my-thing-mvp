@@ -32,23 +32,23 @@ interface ProjectCardProps {
 export function ProjectCard({ project, onMenuClick }: ProjectCardProps) {
   // Show max 3 avatar images
   const visibleCollaborators = project.collaborators?.slice(0, 3) || [];
-  
+
   // Calculate remaining count accurately
   const totalMembers = project.collaborators?.length || project.membersCount;
   const extraCollaboratorsCount = totalMembers - visibleCollaborators.length;
 
   return (
     <div className="group relative bg-white border border-slate-200/80 rounded-[24px] p-5 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 flex flex-col justify-between">
-      
+
       {/* 1. TOP HEADER */}
       <div className="flex items-start justify-between w-full">
         <div className="flex items-start gap-3 min-w-0">
-          <div className="w-12 h-12 rounded-full bg-purple-100/70 flex items-center justify-center shrink-0">
-            <CiFolderOn className="w-6 h-6 text-purple-600 stroke-[0.8]" />
+          <div className="w-12 h-12 rounded-full bg-indigo-100/70 flex items-center justify-center shrink-0">
+            <CiFolderOn className="w-6 h-6 text-indigo-600 stroke-[0.8]" />
           </div>
 
           <div className="flex flex-col min-w-0 pt-0.5">
-            <h3 className="font-bold text-slate-900 text-[16px] leading-tight truncate group-hover:text-purple-600 transition-colors">
+            <h3 className="font-bold text-slate-900 text-[16px] leading-tight truncate group-hover:text-indigo-800 transition-colors">
               {project.name}
             </h3>
             <span className="text-sm text-slate-400 font-medium mt-1 truncate">
@@ -85,8 +85,8 @@ export function ProjectCard({ project, onMenuClick }: ProjectCardProps) {
 
       {/* 3. AI STATUS BADGE: Left aligned (No padding) */}
       <div className="mt-3">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-purple-50 text-purple-600 text-xs font-semibold">
-          <HiSparkles className="w-3.5 h-3.5 text-purple-500 shrink-0" />
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-purple-50 text-indigo-600 text-xs font-semibold">
+          <HiSparkles className="w-3.5 h-3.5 text-[#FFC700] shrink-0" />
           <span>{project.aiStatus}</span>
         </div>
       </div>

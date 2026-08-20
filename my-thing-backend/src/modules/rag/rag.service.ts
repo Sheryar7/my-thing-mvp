@@ -21,7 +21,7 @@ export class RagService {
     private readonly supabaseProvider: SupabaseProvider,
     private readonly geminiProvider: GeminiProvider,
     private readonly chunkingService: ChunkingService,
-  ) {}
+  ) { }
 
   private extractEmbeddingVector(response: unknown): number[] | null {
     const embeddingResponse = response as {
@@ -44,7 +44,7 @@ export class RagService {
   }
 
   private async embedTextWithFallback(
-    text: string, 
+    text: string,
     context: string
   ): Promise<{ embeddingValues: number[]; model: string }> {
     const candidateModels = ['gemini-embedding-001', 'text-embedding-004', 'embedding-001'];

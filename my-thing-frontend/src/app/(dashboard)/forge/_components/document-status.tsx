@@ -4,7 +4,7 @@ import React from "react";
 
 export function DocumentStatus() {
   return (
-    <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs space-y-2.5">
+    <div className="hidden md:block bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs space-y-2.5">
       <h3 className="text-lg font-bold text-slate-900 tracking-tight">
         Document Status
       </h3>
