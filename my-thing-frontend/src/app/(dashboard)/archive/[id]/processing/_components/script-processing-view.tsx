@@ -1,22 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { FiLoader } from "react-icons/fi";
 import { HiArrowLeft } from "react-icons/hi";
 import { IoSparklesOutline } from "react-icons/io5";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 export default function ScriptProcessingView() {
     const router = useRouter();
+    const params = useParams();
+    const projectId = (params?.id as string) || "black-holes";
     const [progress, setProgress] = useState(85);
-    const [steps] = useState([
-        { label: "Reading 10 sources", status: "completed" },
-        { label: "Extracting key insights", status: "completed" },
-        { label: "Organizing research", status: "completed" },
-        { label: "Writing your first draft...", status: "active" },
+    const [steps, setSteps] = useState([
+        { label: "Reading real research sources", status: "completed" },
+        { label: "Extracting key insights and claims", status: "completed" },
+        { label: "Organizing narrative outline", status: "completed" },
+        { label: "Writing your educational script...", status: "active" },
         { label: "Syncing with Workshop", status: "pending" },
     ]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setProgress(100);
+            setSteps([
+                { label: "Reading real research sources", status: "completed" },
+                { label: "Extracting key insights and claims", status: "completed" },
+                { label: "Organizing narrative outline", status: "completed" },
+                { label: "Writing your educational script...", status: "completed" },
+                { label: "Syncing with Workshop", status: "completed" },
+            ]);
+            setTimeout(() => {
+                router.push(`/workshop?project=${projectId}`);
+            }, 800);
+        }, 1500);
+        return () => clearTimeout(timer);
+    }, [projectId, router]);
 
     return (
         <div className="w-full max-w-full min-w-0 overflow-x-hidden space-y-6 font-sans antialiased pb-12">

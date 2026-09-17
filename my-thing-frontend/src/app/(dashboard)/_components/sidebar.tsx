@@ -3,10 +3,26 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GrHomeRounded } from "react-icons/gr";
 import { IoArchiveOutline, IoMicOutline, IoCheckmark } from "react-icons/io5";
 import { LuPenLine, LuLogOut } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
+
+// Custom Home Icon matching Figma reference (media_1789580533737.png) pixel-for-pixel
+function DashboardHomeIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className || "w-6 h-6"}
+    >
+      <path d="M4 10.5 12 3l8 7.5V20a2 2 0 0 1-2 2h-3v-6a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v6H6a2 2 0 0 1-2-2V10.5Z" />
+    </svg>
+  );
+}
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -19,7 +35,7 @@ export default function Sidebar() {
   };
 
   const navItems = [
-    { label: "Dashboard", href: "/dashboard", icon: GrHomeRounded },
+    { label: "Dashboard", href: "/dashboard", icon: DashboardHomeIcon },
     { label: "Archive", href: "/archive", icon: IoArchiveOutline },
     { label: "Workshop", href: "/workshop", icon: LuPenLine },
     { label: "Forge", href: "/forge", icon: IoMicOutline },
@@ -27,18 +43,18 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-60 sticky top-0 h-screen bg-white border-r border-[#E2E8F0] hidden md:flex flex-col p-6 justify-between shrink-0">
+    <aside className="w-64 sticky top-0 h-screen bg-white border-r border-[#E2E8F0] hidden md:flex flex-col p-5 sm:p-6 justify-between shrink-0">
       <div className="flex flex-col gap-8">
         {/* Brand Logo / Home Link */}
-
         <Link
           href="/"
-          className="text-xl font-bold text-slate-900 px-3 tracking-tight hover:opacity-80 transition-opacity w-fit"
+          className="text-2xl font-bold text-slate-900 px-3 tracking-tight hover:opacity-80 transition-opacity w-fit"
         >
           MyThing
         </Link>
 
-        <nav className="flex flex-col gap-1">
+        {/* Navigation Items */}
+        <nav className="flex flex-col gap-2">
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
@@ -47,21 +63,20 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                // 1. Added "group" here so we can style children based on parent hover
-                className={`group flex items-center gap-3 p-3 font-medium rounded-lg transition duration-200 ${active
-                  ? "bg-violet-50 text-violet-600 font-semibold"
-                  : "text-slate-500 hover:bg-slate-50 hover:text-violet-500"
-                  }`}
+                className={`group flex items-center gap-3.5 px-4 py-3 sm:py-3.5 rounded-2xl transition-all duration-200 ${
+                  active
+                    ? "bg-[#f5f3ff] text-[#7c3aed] font-bold shadow-xs"
+                    : "text-slate-500 hover:bg-slate-50 hover:text-[#7c3aed] font-medium"
+                }`}
               >
                 <Icon
-                  // 2. Changed "hover:text-violet-500" to "group-hover:text-violet-500"
-                  // 3. Removed the accidental bg-violet-50 & font-semibold from the active icon class
-                  className={`w-5 h-5 transition-colors duration-200 ${active
-                    ? "text-violet-600"
-                    : "text-slate-500 group-hover:text-violet-500"
-                    }`}
+                  className={`w-6 h-6 shrink-0 transition-colors duration-200 ${
+                    active
+                      ? "text-[#7c3aed]"
+                      : "text-slate-500 group-hover:text-[#7c3aed]"
+                  }`}
                 />
-                <span>{item.label}</span>
+                <span className="text-base sm:text-lg tracking-tight">{item.label}</span>
               </Link>
             );
           })}
@@ -69,13 +84,17 @@ export default function Sidebar() {
       </div>
 
       <div className="flex flex-col gap-1 border-t border-slate-100 pt-4">
-        <Link href="/settings" className="flex items-center gap-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg transition">
+        <Link
+          href="/settings"
+          className="flex items-center gap-3.5 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl transition font-medium"
+        >
           <CiSettings className="w-5 h-5 text-slate-400" />
           <span>Settings</span>
         </Link>
         <button
           type="button"
-          className="flex items-center gap-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg text-left transition w-full">
+          className="flex items-center gap-3.5 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl text-left transition w-full font-medium"
+        >
           <LuLogOut className="w-5 h-5 text-slate-400" />
           <span>Logout</span>
         </button>

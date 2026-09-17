@@ -1,0 +1,68 @@
+services:
+  # 1. Redis Cache & BullMQ Message Broker
+  redis:
+    image: redis:7-alpine
+    container_name: mything-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - mything-network
+
+  # 2. NestJS Backend API
+  backend:
+    build:
+      context: ./my-thing-backend
+      dockerfile: Dockerfile
+    container_name: mything-backend
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - DATABASE_URL=${DATABASE_URL}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - mything-network
+
+  # 3. Next.js Frontend
+  frontend:
+    build:
+      context: ./my-thing-frontend
+      dockerfile: Dockerfile
+    container_name: mything-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:4000
+      - NEXT_PUBLIC_NESTJS_BACKEND_URL=http://backend:4000
+      - NEXT_PUBLIC_SUPABASE_URL=${SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+    depends_on:
+      - backend
+    networks:
+      - mything-network
+
+volumes:
+  redis_data:
+
+networks:
+  mything-network:
+    driver: bridge

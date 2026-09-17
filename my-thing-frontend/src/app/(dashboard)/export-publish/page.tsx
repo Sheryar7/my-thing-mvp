@@ -14,27 +14,27 @@ export default function ExportPublishPage() {
   const router = useRouter();
 
   const [selectedFormat, setSelectedFormat] = useState<FormatType>("mp3");
-  const [fileName, setFileName] = useState("Podcast Episode 12");
+  const [fileName, setFileName] = useState("The Physics of Black Holes & Spacetime");
   const [quality, setQuality] = useState("High");
   const [includeSources, setIncludeSources] = useState(true);
   const [selectedDestination, setSelectedDestination] = useState("Spotify");
 
   return (
-<div className="w-full max-w-full min-w-0 overflow-x-hidden space-y-6 font-sans antialiased pb-12">
-        {/* Header */}
-      <div className="text-center sm:text-left w-full sm:w-auto">
-        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+    <div className="w-full max-w-7xl mx-auto space-y-7 md:space-y-8 font-sans antialiased pb-12">
+      {/* Header */}
+      <div className="text-center sm:text-left w-full">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
           Export & Publish
         </h1>
-        <p className="text-xs sm:text-sm font-medium text-slate-400 mt-0.5">
+        <p className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
           Choose how you'd like to save or share your final content.
         </p>
       </div>
 
-      {/* 2-Column Grid Layout */}
-      <div className="grid grid-cols-2 gap-6 items-start">
+      {/* Responsive Grid Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 items-start">
         {/* Left Column Container */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5 lg:gap-6">
           <ExportFormat
             selectedFormat={selectedFormat}
             onSelectFormat={setSelectedFormat}
@@ -47,7 +47,7 @@ export default function ExportPublishPage() {
         </div>
 
         {/* Right Column Container */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5 lg:gap-6">
           <ExportSettings
             fileName={fileName}
             setFileName={setFileName}
@@ -65,12 +65,12 @@ export default function ExportPublishPage() {
       </div>
 
       {/* Footer Controls */}
-      <div className="flex items-center justify-center gap-3.5 pt-4">
+      <div className="flex flex-col-reverse sm:flex-row items-center justify-center gap-3 sm:gap-3.5 pt-4">
         <Button
           type="button"
           variant="outline"
           onClick={() => router.back()}
-          className="w-auto px-6 py-2.5 h-10 text-indigo-700 border-indigo-700 hover:text-indigo-900 hover:border-indigo-900 text-xs sm:text-sm font-medium rounded-xl"
+          className="w-full sm:w-auto px-6 py-2.5 h-10 text-indigo-700 border border-indigo-600/70 hover:bg-indigo-50 text-xs sm:text-sm font-semibold rounded-xl flex items-center justify-center cursor-pointer transition"
         >
           Back
         </Button>
@@ -78,7 +78,7 @@ export default function ExportPublishPage() {
           type="button"
           variant="primary"
           onClick={() => console.log("Exporting...")}
-          className="w-auto px-6 py-2.5 h-10 text-xs sm:text-sm font-semibold rounded-xl"
+          className="w-full sm:w-auto px-6 py-2.5 h-10 text-xs sm:text-sm font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center cursor-pointer shadow-xs transition"
         >
           Export & Publish
         </Button>

@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 interface DashboardPageHeaderProps {
   border?: boolean;
@@ -13,13 +14,15 @@ export function DashboardPageHeader({
   className,
   children,
 }: DashboardPageHeaderProps) {
-  const wrapperClasses = [
-    "w-full space-y-4 mb-8",
-    border ? "border-b border-slate-100 pb-5" : "",
-    className ?? "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return <div className={wrapperClasses}>{children}</div>;
+  return (
+    <div
+      className={cn(
+        "w-full space-y-4 mb-8",
+        border && "border-b border-slate-100 pb-5",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
 }

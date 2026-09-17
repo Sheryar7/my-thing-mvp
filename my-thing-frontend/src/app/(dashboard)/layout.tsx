@@ -23,11 +23,12 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
    * Determines if the global mobile top header should be hidden based on the active path.
    */
   const shouldHideMobileHeader = () => {
-    // Hide on Workshop, Forge & Lens root pages
+    // Hide on Workshop, Forge, Lens & Export-Publish root pages
     if (
       pathname.startsWith("/workshop") ||
       pathname.startsWith("/forge") ||
-      pathname.startsWith("/lens")
+      pathname.startsWith("/lens") ||
+      pathname.startsWith("/export-publish")
     ) {
       return true;
     }
@@ -42,15 +43,15 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
   const hideHeader = shouldHideMobileHeader();
 
   return (
-    <div className="flex h-screen w-full bg-[#f8fafc] text-slate-900 relative overflow-hidden">
+    <div className="flex min-h-screen w-full bg-[#f8fafc] text-slate-900 relative">
       {/* Persistent Left Sidebar Navigation for Desktop Viewports */}
       <Sidebar />
 
-      <div className="flex-1 flex flex-col overflow-hidden w-full relative">
+      <div className="flex-1 flex flex-col min-w-0 w-full relative">
 
         {/* MOBILE TOP NAVIGATION BAR - Conditional Layer */}
         {!hideHeader && (
-          <div className="md:hidden fixed top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md px-5 py-3.5 flex items-center justify-between">
+          <div className="md:hidden sticky top-0 inset-x-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md px-5 py-3.5 flex items-center justify-between">
             {/* Left Action: Hamburger Menu */}
             <div className="flex items-center w-1/4">
               <button className="inline-flex items-center justify-center rounded-xl bg-slate-50 hover:bg-slate-100 p-2 text-slate-700 transition-colors">
@@ -82,9 +83,8 @@ export default function SharedDashboardLayout({ children }: { children: React.Re
 
         {/* DYNAMIC VIEW ROUTE DISPLAY SYSTEM */}
         <main
-          className="flex-1 min-h-0 overflow-y-auto w-full max-w-7xl mx-auto px-6 md:px-10 pt-10 md:pt-12 pb-12"
+          className="flex-1 w-full max-w-7xl mx-auto px-6 md:px-10 pt-8 sm:pt-10 lg:pt-12 pb-32 md:pb-12"
         >
-          {!hideHeader && <div className="h-20 md:hidden" />}
           {children}
         </main>
 

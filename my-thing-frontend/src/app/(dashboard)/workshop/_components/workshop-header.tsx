@@ -29,7 +29,7 @@ export function WorkshopHeader({
                 {/* Desktop Back Link */}
                 <Link
                     href="/dashboard"
-                    className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors w-fit"
+                    className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors w-fit mb-1.5"
                 >
                     <FiArrowLeft className="w-4 h-4" />
                     <span>Back to Project</span>
@@ -49,13 +49,12 @@ export function WorkshopHeader({
                         {title}
                     </h1>
 
-                    <p className="text-xs text-slate-500 font-medium mt-1">
+                    <p className="text-xs text-slate-500 font-medium mt-1.5">
                         {sourcesCount} Sources • {lastSyncedText}
                     </p>
                 </div>
             </div>
 
-            {/* AFTER */}
             <div className="flex items-center justify-between gap-2.5 sm:gap-3 w-full sm:w-auto shrink-0">
                 <Button
                     type="button"

@@ -2,6 +2,7 @@
 /dist
 /node_modules
 /build
+*.tsbuildinfo
 
 # Logs
 logs
@@ -14,10 +15,19 @@ lerna-debug.log*
 
 # OS
 .DS_Store
+Thumbs.db
+ehthumbs.db
 
 # Tests
 /coverage
 /.nyc_output
+
+# Local Databases & State
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.rdb
 
 # IDEs and editors
 /.idea
@@ -27,6 +37,8 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+*.swp
+*.swo
 
 # IDE - VSCode
 .vscode/*
@@ -35,16 +47,20 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dotenv environment variable files
+# dotenv environment variable files (allow only example)
 .env
+.env.*
+.env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env.local
+!.env.example
+!.env.*.example
 
 # temp directory
 .temp
 .tmp
+.cache
 
 # Runtime data
 pids

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { FiSearch, FiPlus } from "react-icons/fi";
@@ -12,15 +12,49 @@ import { AIProjectInsights } from "./_components/ai-project-insights";
 import Button from "@/components/ui/Button";
 
 const MOCK_SOURCES_DATA: Record<string, { name: string; sources: SourceItemData[] }> = {
-  "podcast-12": {
-    name: "Podcast Episode 12",
+  "black-holes": {
+    name: "The Physics of Black Holes & Spacetime",
     sources: [
-      { id: "src-1", title: "AI Trends in Healthcare", type: "Website", label: "Website", updatedLabel: "Added Today", aiStatus: "AI summarized ✓" },
-      { id: "src-2", title: "AI Conference 2026", type: "Video", label: "Video", duration: "28 mins", updatedLabel: "Added Today", aiStatus: "Transcript Generated ✓" },
-      { id: "src-3", title: "Future of AI.pdf", type: "PDF", label: "PDF", pagesCount: 34, updatedLabel: "Added Today", aiStatus: "Summary Available ✓" },
-      { id: "src-4", title: "AI Trends in Healthcare", type: "Website", label: "Website", updatedLabel: "Added Today", aiStatus: "AI summarized ✓" },
-      { id: "src-5", title: "AI Conference 2026", type: "Video", label: "Video", duration: "28 mins", updatedLabel: "Added Today", aiStatus: "Transcript Generated ✓" },
-      { id: "src-6", title: "Future of AI.pdf", type: "PDF", label: "PDF", pagesCount: 34, updatedLabel: "Added Today", aiStatus: "Summary Available ✓" },
+      { id: "bh-1", title: "Event Horizon Telescope M87* Observations", type: "Website", label: "Website", updatedLabel: "Added Today", aiStatus: "AI summarized ✓" },
+      { id: "bh-2", title: "Stephen Hawking - Particle Creation by Black Holes.pdf", type: "PDF", label: "PDF", pagesCount: 28, updatedLabel: "Added Today", aiStatus: "Summary Available ✓" },
+      { id: "bh-3", title: "LIGO Gravitational Waves Binary Merger Detection", type: "Video", label: "Video", duration: "18 mins", updatedLabel: "Added Yesterday", aiStatus: "Transcript Generated ✓" },
+      { id: "bh-4", title: "Spacetime Singularity & Information Paradox Notes", type: "Notes", label: "Notes", updatedLabel: "Added 2d ago", aiStatus: "Claims Extracted ✓" },
+    ],
+  },
+  "ai-healthcare": {
+    name: "AI Ethics & Diagnostic Bias in Healthcare",
+    sources: [
+      { id: "ai-1", title: "Algorithmic Bias in Clinical Decision Support Systems", type: "Website", label: "Website", updatedLabel: "Added Today", aiStatus: "AI summarized ✓" },
+      { id: "ai-2", title: "WHO Ethics & Governance of AI for Health.pdf", type: "PDF", label: "PDF", pagesCount: 42, updatedLabel: "Added Today", aiStatus: "Summary Available ✓" },
+      { id: "ai-3", title: "Stanford Medicine - Deep Learning in Radiology Lecture", type: "Video", label: "Video", duration: "35 mins", updatedLabel: "Added Yesterday", aiStatus: "Transcript Generated ✓" },
+      { id: "ai-4", title: "HIPAA Patient Privacy & Model Drift Research Notes", type: "Notes", label: "Notes", updatedLabel: "Added 3d ago", aiStatus: "Claims Extracted ✓" },
+    ],
+  },
+  "roman-republic": {
+    name: "The Fall of the Roman Republic: From Caesar to Empire",
+    sources: [
+      { id: "rr-1", title: "The Rubicon & Constitutional Crisis: 49 BCE", type: "Website", label: "Website", updatedLabel: "Added Today", aiStatus: "AI summarized ✓" },
+      { id: "rr-2", title: "Cicero's Philippics on Tyranny & Oligarchy.pdf", type: "PDF", label: "PDF", pagesCount: 56, updatedLabel: "Added Yesterday", aiStatus: "Summary Available ✓" },
+      { id: "rr-3", title: "Dan Carlin - Death Throes of the Republic Audio Essay", type: "Video", label: "Video", duration: "52 mins", updatedLabel: "Added 2d ago", aiStatus: "Transcript Generated ✓" },
+      { id: "rr-4", title: "Agrarian Land Reforms & Roman Legionary Loyalty Notes", type: "Notes", label: "Notes", updatedLabel: "Added 4d ago", aiStatus: "Claims Extracted ✓" },
+    ],
+  },
+  "crispr-genetics": {
+    name: "How CRISPR-Cas9 is Rewriting the Code of Life",
+    sources: [
+      { id: "cg-1", title: "Doudna & Charpentier 2012 Dual-RNA Cas9 Discovery.pdf", type: "PDF", label: "PDF", pagesCount: 22, updatedLabel: "Added Today", aiStatus: "Summary Available ✓" },
+      { id: "cg-2", title: "FDA Approval of Casgevy for Sickle Cell Disease", type: "Website", label: "Website", updatedLabel: "Added Today", aiStatus: "AI summarized ✓" },
+      { id: "cg-3", title: "MIT Broad Institute - Prime Editing vs Base Editing", type: "Video", label: "Video", duration: "24 mins", updatedLabel: "Added Yesterday", aiStatus: "Transcript Generated ✓" },
+      { id: "cg-4", title: "Off-Target Double Strand Breaks & Germline Ethics Notes", type: "Notes", label: "Notes", updatedLabel: "Added 3d ago", aiStatus: "Claims Extracted ✓" },
+    ],
+  },
+  "habit-psychology": {
+    name: "The Neuroscience of Habit Formation & Dopamine Loops",
+    sources: [
+      { id: "hp-1", title: "MIT Study - Basal Ganglia & Chunked Action Loops.pdf", type: "PDF", label: "PDF", pagesCount: 30, updatedLabel: "Added Today", aiStatus: "Summary Available ✓" },
+      { id: "hp-2", title: "Dopamine Reward Prediction Errors in Behavioral Conditioning", type: "Website", label: "Website", updatedLabel: "Added Yesterday", aiStatus: "AI summarized ✓" },
+      { id: "hp-3", title: "Huberman Lab - Neural Plasticity & Friction Protocol", type: "Video", label: "Video", duration: "44 mins", updatedLabel: "Added 2d ago", aiStatus: "Transcript Generated ✓" },
+      { id: "hp-4", title: "Cue-Routine-Reward Implementation Protocol Notes", type: "Notes", label: "Notes", updatedLabel: "Added 4d ago", aiStatus: "Claims Extracted ✓" },
     ],
   },
 };
@@ -28,13 +62,65 @@ const MOCK_SOURCES_DATA: Record<string, { name: string; sources: SourceItemData[
 export default function ProjectSubViewPage() {
   const params = useParams();
   const router = useRouter();
-  const projectId = (params?.id as string) || "podcast-12";
-  const projectData = MOCK_SOURCES_DATA[projectId] || MOCK_SOURCES_DATA["podcast-12"];
+  const rawId = (params?.id as string) || "black-holes";
+  
+  // Lookup fallback in mock if available
+  const initialFallback = MOCK_SOURCES_DATA[rawId] || MOCK_SOURCES_DATA["black-holes"];
 
+  const [projectName, setProjectName] = useState<string>(initialFallback.name);
+  const [sources, setSources] = useState<SourceItemData[]>(initialFallback.sources);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"All" | "Websites" | "PDFs" | "Notes" | "Videos">("All");
 
-  const filteredSources = projectData.sources.filter((source) => {
+  useEffect(() => {
+    async function loadProjectData() {
+      try {
+        const backendUrl = process.env.NEXT_PUBLIC_NESTJS_BACKEND_URL || "http://localhost:4000";
+        
+        // Fetch project metadata
+        const projRes = await fetch(`${backendUrl}/v1/projects/${rawId}`).catch(() => null);
+        if (projRes && projRes.ok) {
+          const projData = await projRes.json().catch(() => null);
+          if (projData && projData.name) {
+            setProjectName(projData.name);
+          }
+        }
+
+        // Fetch sources for this project
+        const srcRes = await fetch(`${backendUrl}/v1/archive/sources?projectId=${rawId}`).catch(() => null);
+        if (srcRes && srcRes.ok) {
+          const srcData = await srcRes.json().catch(() => null);
+          if (Array.isArray(srcData) && srcData.length > 0) {
+            const mappedSources: SourceItemData[] = srcData.map((s: { id: string; title: string; source_type?: string; summary?: string }) => {
+              const typeMap: Record<string, "Website" | "PDF" | "Video" | "Notes"> = {
+                website: "Website",
+                pdf: "PDF",
+                video: "Video",
+                notes: "Notes",
+              };
+              const sType = typeMap[s.source_type?.toLowerCase() || ""] || "Website";
+              return {
+                id: s.id,
+                title: s.title,
+                type: sType,
+                label: sType,
+                pagesCount: sType === "PDF" ? 28 : undefined,
+                duration: sType === "Video" ? "18 mins" : undefined,
+                updatedLabel: "Added Today",
+                aiStatus: s.summary ? "AI summarized ✓" : "Summary Available ✓",
+              };
+            });
+            setSources(mappedSources);
+          }
+        }
+      } catch {
+        // Graceful fallback to default mock sources without console noise
+      }
+    }
+    loadProjectData();
+  }, [rawId]);
+
+  const filteredSources = sources.filter((source) => {
     const matchesSearch = source.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTab =
       activeTab === "All" ||
@@ -46,13 +132,13 @@ export default function ProjectSubViewPage() {
   });
 
   return (
-    <div className="w-full max-w-full min-w-0 overflow-x-hidden space-y-6 font-sans antialiased pb-12">
+    <div className="w-full max-w-full min-w-0 overflow-x-hidden space-y-7 md:space-y-8 font-sans antialiased pb-12">
       {/* 1. TOP HEADER & NAVIGATION */}
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         {/* Visible on Desktop (>=768px), Hidden on Mobile */}
         <Link
           href="/archive"
-          className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors w-fit"
+          className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors w-fit mb-1.5"
         >
           <FiArrowLeft className="w-4 h-4" />
           <span>Back to Archive</span>
@@ -70,10 +156,10 @@ export default function ProjectSubViewPage() {
             </Link>
 
             <h1 className="text-xl md:text-3xl font-bold tracking-tight text-slate-900 px-7 md:px-0">
-              {projectData.name}
+              {projectName}
             </h1>
-            <p className="text-xs text-slate-400 font-medium mt-1">
-              {projectData.sources.length} Sources • 4 Members • Updated 2h ago
+            <p className="text-xs text-slate-500 font-medium mt-1.5">
+              {sources.length} Sources • 4 Members • Updated 2h ago
             </p>
           </div>
 
@@ -139,7 +225,7 @@ export default function ProjectSubViewPage() {
         {filteredSources.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
             {filteredSources.map((source) => (
-              <SourceItemCard key={source.id} source={source} projectId={projectId} />
+              <SourceItemCard key={source.id} source={source} projectId={rawId} />
             ))}
           </div>
         ) : (

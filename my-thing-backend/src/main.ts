@@ -1,25 +1,28 @@
-// import { NestFactory } from '@nestjs/core';
-// import { AppModule } from './app.module';
-
-// async function bootstrap() {
-//   const app = await NestFactory.create(AppModule);
-//   await app.listen(process.env.PORT ?? 3000);
-// }
-// bootstrap();
-
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Enable CORS so Next.js (port 3000) can make API calls to NestJS (port 4000)
+  // Enable CORS for Next.js and external clients
   app.enableCors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
 
-  await app.listen(4000);
-  console.log(`NestJS Backend is running on: http://localhost:4000`);
+  // Enable global request validation & transformation
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: false,
+    }),
+  );
+
+  const port = process.env.PORT || 4000;
+  await app.listen(port);
+  console.log(`🚀 "My Thing" NestJS Backend running on: http://localhost:${port}`);
 }
 bootstrap();

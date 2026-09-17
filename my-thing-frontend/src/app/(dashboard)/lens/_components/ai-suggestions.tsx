@@ -16,9 +16,9 @@ export function AISuggestions({
   ],
 }: AISuggestionsProps) {
   return (
-    <div className="w-full bg-white border border-slate-200/80 rounded-2xl p-6 shadow-2xs">
+    <div className="w-full bg-white border border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-2xs">
       {/* Title */}
-      <h2 className="text-lg font-bold text-slate-900 tracking-tight mb-4">
+      <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight mb-3 sm:mb-4">
         AI Suggestions
       </h2>
 

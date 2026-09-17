@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ArchiveHeader } from "./_components/archive-header";
 import { ArchiveFilterBar } from "./_components/archive-filter-bar";
 import { ProjectCard, ProjectData } from "./_components/project-card";
@@ -10,105 +10,103 @@ import { DashboardPageHeader } from "../_components/dashboard-page-header";
 // High-fidelity Mock Data matching the new Figma design
 const MOCK_PROJECTS: ProjectData[] = [
   {
-    id: "podcast-12",
-    name: "Podcast Episode 12",
-    category: "Podcast Production",
-    sourcesCount: 18,
+    id: "black-holes",
+    name: "The Physics of Black Holes & Spacetime",
+    category: "Astrophysics & Cosmology",
+    sourcesCount: 16,
     membersCount: 4,
     aiStatus: "Ready for Script Generation",
     updatedAtLabel: "Updated 2h ago",
     status: "Active",
     collaborators: [
-      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
+      { id: "1", name: "Prof. Thorne", avatarUrl: "https://i.pravatar.cc/100?img=11" },
       { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
-      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
-      { id: "4", name: "Mike", avatarUrl: "https://i.pravatar.cc/100?img=12" },
+      { id: "3", name: "Dr. Hawking", avatarUrl: "https://i.pravatar.cc/100?img=9" },
     ],
   },
   {
-    id: "ai-ethics",
-    name: "AI Ethics Research",
-    category: "Research",
-    sourcesCount: 25,
+    id: "ai-healthcare",
+    name: "AI Ethics & Diagnostic Bias in Healthcare",
+    category: "Technology & Medicine",
+    sourcesCount: 24,
     membersCount: 3,
     aiStatus: "AI Summary Available",
     updatedAtLabel: "Updated Yesterday",
     status: "Active",
     collaborators: [
-      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
+      { id: "1", name: "Dr. Chen", avatarUrl: "https://i.pravatar.cc/100?img=11" },
       { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
-      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
+      { id: "3", name: "Alex", avatarUrl: "https://i.pravatar.cc/100?img=9" },
     ],
   },
   {
-    id: "marketing-campaign",
-    name: "Marketing Campaign",
-    category: "Marketing",
-    sourcesCount: 12,
-    membersCount: 2,
+    id: "roman-republic",
+    name: "The Fall of the Roman Republic: From Caesar to Empire",
+    category: "Ancient History & Politics",
+    sourcesCount: 19,
+    membersCount: 5,
     aiStatus: "Ready for Script Generation",
     updatedAtLabel: "Updated Today",
     status: "Active",
     collaborators: [
-      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
-      { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
+      { id: "1", name: "Marcus", avatarUrl: "https://i.pravatar.cc/100?img=12" },
+      { id: "2", name: "Elena", avatarUrl: "https://i.pravatar.cc/100?img=8" },
+      { id: "3", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
     ],
   },
   {
-    id: "startup-pitch",
-    name: "Startup Pitch",
-    category: "Presentation",
-    sourcesCount: 8,
-    membersCount: 5,
-    aiStatus: "AI Processing...",
+    id: "crispr-genetics",
+    name: "How CRISPR-Cas9 is Rewriting the Code of Life",
+    category: "Biotechnology & Genetics",
+    sourcesCount: 22,
+    membersCount: 4,
+    aiStatus: "Script Generated",
     updatedAtLabel: "Updated 3d ago",
+    status: "Completed",
+    collaborators: [
+      { id: "1", name: "Dr. Doudna", avatarUrl: "https://i.pravatar.cc/100?img=5" },
+      { id: "2", name: "Michael", avatarUrl: "https://i.pravatar.cc/100?img=15" },
+      { id: "3", name: "Emma", avatarUrl: "https://i.pravatar.cc/100?img=20" },
+    ],
+  },
+  {
+    id: "habit-psychology",
+    name: "The Neuroscience of Habit Formation & Dopamine Loops",
+    category: "Behavioral Psychology",
+    sourcesCount: 14,
+    membersCount: 3,
+    aiStatus: "AI Processing...",
+    updatedAtLabel: "Updated 4d ago",
     status: "Drafts",
     collaborators: [
-      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
+      { id: "1", name: "Andrew", avatarUrl: "https://i.pravatar.cc/100?img=3" },
       { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
-      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
-      { id: "4", name: "David", avatarUrl: "https://i.pravatar.cc/100?img=3" },
-      { id: "5", name: "Emma", avatarUrl: "https://i.pravatar.cc/100?img=20" },
-    ],
-  },
-  {
-    id: "healthcare-report",
-    name: "Healthcare Report",
-    category: "Research",
-    sourcesCount: 32,
-    membersCount: 6,
-    aiStatus: "Script Generated",
-    updatedAtLabel: "Updated 5d ago",
-    status: "Completed",
-    collaborators: [
-      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
-      { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
-      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
-      { id: "4", name: "David", avatarUrl: "https://i.pravatar.cc/100?img=3" },
-      { id: "5", name: "Emma", avatarUrl: "https://i.pravatar.cc/100?img=20" },
-      { id: "6", name: "Michael", avatarUrl: "https://i.pravatar.cc/100?img=15" },
-    ],
-  },
-  {
-    id: "product-launch",
-    name: "Product Launch Campaign",
-    category: "Campaign",
-    sourcesCount: 20,
-    membersCount: 3,
-    aiStatus: "Ready for Script Generation",
-    updatedAtLabel: "Updated 1w ago",
-    status: "Completed",
-    collaborators: [
-      { id: "1", name: "John", avatarUrl: "https://i.pravatar.cc/100?img=11" },
-      { id: "2", name: "Sara", avatarUrl: "https://i.pravatar.cc/100?img=5" },
-      { id: "3", name: "Alexa", avatarUrl: "https://i.pravatar.cc/100?img=9" },
     ],
   },
 ];
 
 export default function ArchivePage() {
+  const [projects, setProjects] = useState<ProjectData[]>(MOCK_PROJECTS);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"All" | "Active" | "Completed" | "Drafts">("All");
+
+  useEffect(() => {
+    async function loadProjects() {
+      try {
+        const backendUrl = process.env.NEXT_PUBLIC_NESTJS_BACKEND_URL || "http://localhost:4000";
+        const res = await fetch(`${backendUrl}/v1/projects`).catch(() => null);
+        if (res && res.ok) {
+          const data = await res.json().catch(() => null);
+          if (Array.isArray(data) && data.length > 0) {
+            setProjects(data);
+          }
+        }
+      } catch {
+        // Fallback to MOCK_PROJECTS
+      }
+    }
+    loadProjects();
+  }, []);
 
   const handleCreateProject = () => {
     console.log("Create new project initialized!");
@@ -119,7 +117,7 @@ export default function ArchivePage() {
   };
 
   // Filter projects by both search query and status tab
-  const filteredProjects = MOCK_PROJECTS.filter((project) => {
+  const filteredProjects = projects.filter((project) => {
     const matchesSearch =
       project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.category.toLowerCase().includes(searchQuery.toLowerCase());

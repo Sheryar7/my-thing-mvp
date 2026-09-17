@@ -9,6 +9,7 @@ interface DocumentHeaderProps {
   projectId: string;
   docMetadata: {
     title: string;
+    projectTitle?: string;
     typeLabel: string;
     statsLabel: string;
     timeLabel: string;
@@ -17,13 +18,13 @@ interface DocumentHeaderProps {
 
 export function DocumentHeader({ projectId, docMetadata }: DocumentHeaderProps) {
   return (
-    <div className="space-y-1.5">
+    <div className="space-y-2">
       <Link
         href={`/archive/${projectId}`}
-        className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors w-fit"
+        className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors w-fit mb-1.5"
       >
         <FiArrowLeft className="w-4 h-4" />
-        <span>Back to Podcast Episode 12</span>
+        <span>Back to {docMetadata.projectTitle || "Project"}</span>
       </Link>
 
       <div className="relative flex flex-col items-center sm:items-start text-center sm:text-left">
@@ -39,7 +40,7 @@ export function DocumentHeader({ projectId, docMetadata }: DocumentHeaderProps) 
           {docMetadata.title}
         </h1>
 
-        <p className="text-xs text-slate-500 font-medium mt-1">
+        <p className="text-xs text-slate-500 font-medium mt-1.5">
           {docMetadata.typeLabel} • {docMetadata.statsLabel} • {docMetadata.timeLabel}
         </p>
       </div>

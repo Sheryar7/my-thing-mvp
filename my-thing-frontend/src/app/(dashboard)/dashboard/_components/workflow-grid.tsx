@@ -9,54 +9,54 @@ import { WorkflowCard, type WorkflowCardConfig } from "./workflow-card";
 const workflowSteps: WorkflowCardConfig[] = [
   {
     title: "Archive",
-    description: "Track your sources and prepare research materials.",
-    mobileDescription: "Track sources and research.",
+    description: "Collect and organize articles, links and research materials.",
+    mobileDescription: "Track your sources",
     icon: IoArchiveOutline,
     accent: {
-      background: "bg-emerald-50",
-      border: "border-emerald-200",
-      iconBackground: "bg-emerald-200",
-      iconColor: "text-emerald-700",
-      button: "border-emerald-300 text-emerald-700 hover:bg-emerald-50",
+      background: "bg-[#f2fbf5]",
+      border: "border-[#bbf7d0]",
+      iconBackground: "bg-[#bbf7d0]",
+      iconColor: "text-[#16a34a]",
+      button: "border-[#22c55e] text-[#16a34a] hover:bg-green-50/50",
     },
   },
   {
     title: "Workshop",
-    description: "Write and refine your script with AI assistance.",
-    mobileDescription: "Write and refine your script.",
+    description: "Write, edit and refine your script using AI assistance.",
+    mobileDescription: "Write your script",
     icon: LuPenLine,
     accent: {
-      background: "bg-violet-50",
-      border: "border-violet-200",
-      iconBackground: "bg-violet-200",
-      iconColor: "text-violet-700",
-      button: "border-violet-300 text-violet-700 hover:bg-violet-50",
+      background: "bg-[#f6f5fe]",
+      border: "border-[#ddd6fe]",
+      iconBackground: "bg-[#ddd6fe]",
+      iconColor: "text-[#7c3aed]",
+      button: "border-[#7c3aed] text-[#7c3aed] hover:bg-purple-50/50",
     },
   },
   {
     title: "Forge",
     description: "Prepare everything before recording your content.",
-    mobileDescription: "Prepare before recording.",
+    mobileDescription: "Prepare for recording",
     icon: IoMicOutline,
     accent: {
-      background: "bg-orange-50",
-      border: "border-orange-200",
-      iconBackground: "bg-orange-200",
-      iconColor: "text-orange-700",
-      button: "border-orange-300 text-orange-700 hover:bg-orange-50",
+      background: "bg-[#fff8f2]",
+      border: "border-[#fed7aa]",
+      iconBackground: "bg-[#fed7aa]",
+      iconColor: "text-[#ea580c]",
+      button: "border-[#f97316] text-[#ea580c] hover:bg-orange-50/50",
     },
   },
   {
     title: "Lens",
-    description: "Validate facts and improve accuracy before publishing.",
-    mobileDescription: "Validate facts and accuracy.",
+    description: "Verify facts and improve accuracy before publishing.",
+    mobileDescription: "Validate all facts",
     icon: IoCheckmark,
     accent: {
-      background: "bg-pink-50",
-      border: "border-pink-200",
-      iconBackground: "bg-pink-200",
-      iconColor: "text-pink-700",
-      button: "border-pink-300 text-pink-700 hover:bg-pink-50",
+      background: "bg-[#fff2f4]",
+      border: "border-[#fecdd3]",
+      iconBackground: "bg-[#fecdd3]",
+      iconColor: "text-[#e11d48]",
+      button: "border-[#f43f5e] text-[#e11d48] hover:bg-rose-50/50",
     },
   },
 ];
@@ -65,23 +65,22 @@ export function WorkflowGrid() {
   const router = useRouter();
 
   const handleOpenStage = (stageTitle: string) => {
-    // Navigate based on stage title (e.g., "Archive" -> "/archive")
     const route = `/${stageTitle.toLowerCase()}`;
     router.push(route);
   };
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-3 sm:space-y-4 w-full">
       <div>
-        <h3 className="text-lg font-bold tracking-tight text-slate-900">
+        <h2 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900">
           Workflow
-        </h3>
-        <p className="mt-1 text-sm text-slate-500">
+        </h2>
+        <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm text-slate-400">
           Your content creation process
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 w-full">
         {workflowSteps.map((workflow) => (
           <WorkflowCard
             key={workflow.title}

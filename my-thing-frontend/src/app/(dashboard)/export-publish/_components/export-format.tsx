@@ -52,11 +52,11 @@ export function ExportFormat({
   ] as const;
 
   return (
-    <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
-      <h2 className="text-sm font-bold text-slate-900">Export Format</h2>
+    <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+      <h2 className="text-base font-bold text-slate-900">Export Format</h2>
 
       {/* 4 Cards in One Single Line */}
-      <div className="flex items-center gap-3 w-full">
+      <div className="grid grid-cols-4 gap-2 sm:gap-3 w-full">
         {formats.map((fmt) => {
           const Icon = fmt.icon;
           const isActive = selectedFormat === fmt.id;
@@ -66,14 +66,14 @@ export function ExportFormat({
               key={fmt.id}
               type="button"
               onClick={() => onSelectFormat(fmt.id)}
-              className={`flex-1 flex flex-col items-center justify-center p-3 h-28 rounded-2xl border transition-all cursor-pointer min-w-0 ${
+              className={`flex flex-col items-center justify-center p-2 sm:p-3 h-24 sm:h-28 rounded-2xl border transition-all cursor-pointer min-w-0 ${
                 isActive
                   ? "bg-[#EEECFE] border-indigo-500 text-indigo-600 shadow-xs ring-1 ring-indigo-500"
                   : "bg-white border-slate-200 text-slate-600 hover:border-slate-300"
               }`}
             >
               <Icon 
-                className={`w-6 h-6 mb-2 shrink-0 ${fmt.defaultColor}`} 
+                className={`w-5 h-5 sm:w-6 sm:h-6 mb-1 sm:mb-2 shrink-0 ${fmt.defaultColor}`} 
               />
               <span className="text-xs font-bold text-slate-900 truncate w-full text-center">
                 {fmt.label}

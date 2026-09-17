@@ -7,7 +7,7 @@ import { FiGlobe, FiFileText, FiCheck } from "react-icons/fi";
 export interface SourceItem {
   id: string;
   title: string;
-  type: "Web" | "PDF";
+  type: "Web" | "PDF" | "Video" | "Notes";
   selected: boolean;
 }
 

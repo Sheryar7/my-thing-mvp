@@ -13,4 +13,8 @@ export class QueryRagDto {
   @IsString({ each: true })
   @IsOptional()
   documentIds?: string[];
+
+  @IsString()
+  @IsOptional()
+  currentScript?: string;
 }

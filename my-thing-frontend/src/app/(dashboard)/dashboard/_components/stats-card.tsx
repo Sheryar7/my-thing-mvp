@@ -1,38 +1,34 @@
 "use client";
 
 import React from "react";
-import { CiFolderOn, CiFileOn } from "react-icons/ci";
-import { GoPencil } from "react-icons/go";
-import { GiCheckMark } from "react-icons/gi";
+import { IoArchiveOutline, IoDocumentTextOutline, IoCheckmark } from "react-icons/io5";
+import { LuPenLine } from "react-icons/lu";
 
 interface StatsCardProps {
     label: string;
     value: number | string;
-    variant: "green" | "blue" | "orange" | "pink";
+    variant: "green" | "purple" | "orange" | "pink";
 }
 
-// Transparent tint backgrounds matching the Figma stat card style.
 const containerVariants = {
-    // Format: border-[color]/[border-opacity] bg-[color]/[bg-opacity]
-    green:   "border border-green-500/50 bg-green-400/5",
-    blue:    "border border-purple-500/50 bg-purple-400/5",
-    orange:  "border border-orange-500/50 bg-orange-400/5",
-    pink:    "border border-pink-500/50 bg-pink-400/5",
+    green:  "border border-green-200 bg-[#f7fef9]",
+    purple: "border border-purple-200 bg-[#faf8ff]",
+    orange: "border border-orange-200 bg-[#fffaf5]",
+    pink:   "border border-pink-200 bg-[#fff8f8]",
 };
 
-// Icon container colors for consistent badge appearance.
 const iconVariants = {
-    green:   "bg-green-200 text-green-600 shadow-sm",
-    blue:    "bg-purple-200 text-purple-600 shadow-sm",
-    orange:  "bg-orange-200 text-orange-600 shadow-sm",
-    pink:    "bg-pink-200 text-pink-600 shadow-sm",
+    green:  "bg-[#dcfce7] text-[#16a34a]",
+    purple: "bg-[#ede9fe] text-[#7c3aed]",
+    orange: "bg-[#ffedd5] text-[#ea580c]",
+    pink:   "bg-[#ffe4e6] text-[#e11d48]",
 };
 
 const iconMap = {
-    green:   CiFolderOn,
-    blue:    CiFileOn,
-    orange:  GoPencil,
-    pink:    GiCheckMark,
+    green:  IoArchiveOutline,
+    purple: IoDocumentTextOutline,
+    orange: LuPenLine,
+    pink:   IoCheckmark,
 };
 
 export function StatsCard({ label, value, variant }: StatsCardProps) {
@@ -40,17 +36,17 @@ export function StatsCard({ label, value, variant }: StatsCardProps) {
 
     return (
         <div
-            className={`min-h-[115px] p-3 sm:p-4 rounded-3xl flex items-center gap-3 sm:gap-4 w-full transition-all duration-200 ${containerVariants[variant]}`}
+            className={`p-4 rounded-2xl flex items-center gap-3.5 sm:gap-4 w-full h-full min-h-[96px] transition-all duration-200 hover:shadow-sm ${containerVariants[variant]}`}
         >
             <div className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${iconVariants[variant]}`}>
-                <IconComponent className="w-5 h-5 stroke-[0.3]" />
+                <IconComponent className="w-5 h-5" />
             </div>
 
             <div className="flex flex-col min-w-0">
-                <span className="text-sm font-medium text-slate-600 leading-none mb-1 whitespace-nowrap">
+                <span className="text-xs sm:text-sm font-medium text-slate-500 leading-tight">
                     {label}
                 </span>
-                <span className="text-2xl md:text-3xl font-bold text-slate-900 leading-none tracking-tight">
+                <span className="text-2xl md:text-3xl font-bold text-slate-900 leading-none tracking-tight mt-1">
                     {value}
                 </span>
             </div>

@@ -17,7 +17,7 @@ interface AssistantProps {
   prompt: string;
   onChange: (val: string) => void;
   onSubmit?: () => void;
-  onResponse?: (answer: string, chunks?: any[]) => void;
+  onResponse?: (answer: string, chunks?: unknown[]) => void;
   workspaceId?: string;
   selectedDocumentIds?: string[];
   isLoading?: boolean;
@@ -63,7 +63,7 @@ export function AIAssistant({
       const backendUrl =
         process.env.NEXT_PUBLIC_NESTJS_BACKEND_URL || "http://localhost:4000";
 
-      const payload: Record<string, any> = {
+      const payload: Record<string, unknown> = {
         question: prompt,
         workspaceId: workspaceId || "8f11ccc8-308b-43a1-a8ad-2d7f727176df",
       };
@@ -86,8 +86,9 @@ export function AIAssistant({
       } else {
         setError(data.message || data.error || "Failed to generate AI response.");
       }
-    } catch (err: any) {
-      setError(err.message || "An unexpected error occurred.");
+    } catch (err: unknown) {
+      const errMsg = err instanceof Error ? err.message : "An unexpected error occurred.";
+      setError(errMsg);
     } finally {
       setInternalLoading(false);
     }
